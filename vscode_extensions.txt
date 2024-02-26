@@ -1,4 +1,5 @@
 eamodio.gitlens
+johnpapa.vscode-peacock
 mathworks.language-matlab
 ms-azuretools.vscode-docker
 ms-python.python
