@@ -4,7 +4,7 @@
 sudo apt update
 sudo apt install -y curl wget gpg
 
-# Firefox
+# Firefox (DEB)
 sudo add-apt-repository ppa:mozillateam/ppa
 echo '
 Package: *
