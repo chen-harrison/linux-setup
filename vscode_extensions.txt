@@ -1,4 +1,5 @@
 eamodio.gitlens
+Gruntfuggly.todo-tree
 johnpapa.vscode-peacock
 mathworks.language-matlab
 ms-azuretools.vscode-docker
