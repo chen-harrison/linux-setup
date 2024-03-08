@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Necessary packages
 sudo apt update
+
+# Necessary packages for installation
 sudo apt install -y curl wget gpg
 
 # Firefox (DEB)
