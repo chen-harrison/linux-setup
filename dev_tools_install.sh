@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+sudo apt update
+
+# Necessary packages for installation
+sudo apt install -y curl gpg
+
+# Foxglove Studio
+sudo apt install -y foxglove-studio
+
 # (Optional) uninstall Docker
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
 if [[ "$REPLY" =~ ^[yY]$ ]] ; then
@@ -37,6 +45,10 @@ sudo apt-get install -y \
     containerd.io \
     docker-buildx-plugin \
     docker-compose-plugin
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
 
 # Nvidia Container Toolkit (?)
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
