@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 setup_dir=$(dirname $0)
-cd ${setup_dir}
+cd $setup_dir
 
 # Ubuntu 22.04 video playback fix
 read -r -p "Is this Ubuntu 22.04 [y/N]? "

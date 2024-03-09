@@ -42,7 +42,7 @@ sudo apt install -y code
 install_dir=$(dirname $0)
 cat ${install_dir}/vscode_extensions.txt | while read extension || [[ -n ${extension} ]];
 do
-    code --install-extension ${extension} --force
+    code --install-extension $extension --force
 done
 
 # Discord
