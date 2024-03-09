@@ -20,3 +20,10 @@ fi
 ./packages_install.sh
 ./apps_install.sh
 ./dev_tools_install.sh
+
+echo \ "
+TODO:
+- Add SSH key to Github
+- Prefix + I in TMUX to install plugins
+- Install Nvidia drivers
+"
