@@ -15,3 +15,6 @@ sudo apt update && sudo apt install -y \
 
 # tldr
 sudo pip3 install tldr numpy
+
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
