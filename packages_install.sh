@@ -13,8 +13,16 @@ sudo apt update && sudo apt install -y \
     tmux \
     ubuntu-restricted-extras
 
-# tldr
+# TLDR
 sudo pip3 install tldr numpy
 
-# tpm
+# SSH key
+read -r -p "Email address for SSH key: "
+if [[ $REPLY ]] ; then
+    ssh-keygen -t ed25519 -C "$REPLY"
+else
+    echo "No input received, skipping ssh-keygen"
+fi
+
+# TPM
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
