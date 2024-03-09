@@ -5,4 +5,3 @@ Currently testing on Ubuntu 22.04
 ### TODO:
 - Nvidia drivers
 - Plotjuggler (?)
-- SSH key generation
