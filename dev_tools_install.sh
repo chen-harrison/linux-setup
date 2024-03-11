@@ -6,7 +6,11 @@ sudo apt update
 sudo apt install -y curl gpg
 
 # Foxglove Studio
-sudo apt install -y foxglove-studio
+foxglove_deb=$(curl -s "https://api.github.com/repos/foxglove/studio/releases/latest" | grep '"browser_download_url":.*linux-amd64.deb' | sed -E 's/.*"([^"]+)".*/\1/')
+echo $foxglove_deb
+wget -O foxglove-studio.deb "$foxglove_deb"
+sudo dpkg -i foxglove-studio.deb
+rm foxglove-studio.deb
 
 # (Optional) uninstall Docker
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
@@ -59,3 +63,5 @@ sudo apt-get install -y nvidia-container-toolkit
 
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
+
+docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
