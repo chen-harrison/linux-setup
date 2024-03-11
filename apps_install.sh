@@ -17,7 +17,7 @@ Pin: version 1:1snap1-0ubuntu2
 Pin-Priority: -1
 ' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 sudo snap remove --purge firefox
-sudo apt install -y firefox
+sudo apt install -y xul-ext-ubufox firefox
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 # Spotify
