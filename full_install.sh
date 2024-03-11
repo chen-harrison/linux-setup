@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-setup_dir=$(dirname $0)
-cd $setup_dir
+script_dir=$(dirname $0)
+cd $script_dir
 
 # Ubuntu 22.04 video playback fix
 read -r -p "Is this Ubuntu 22.04 [y/N]? "
@@ -19,11 +19,11 @@ fi
 
 ./packages_install.sh
 ./apps_install.sh
-./dev_tools_install.sh
+# ./dev_tools_install.sh
 
 echo \ "
 TODO:
-- Add SSH key to Github
-- Prefix + I in TMUX to install plugins
-- Install Nvidia drivers
+- Restart to apply Nvidia drivers
+- Add public SSH keys where needed (e.g. GitHub)
+- ./dev_tools_install.sh
 "
