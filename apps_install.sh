@@ -57,3 +57,7 @@ rm chrome.deb
 
 # Dropbox (send to Download page)
 firefox https://www.dropbox.com/install-linux
+
+gsettings set org.gnome.shell favorite-apps \
+"['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'code.desktop', 'spotify.desktop']"
+gsettings set org.gnome.desktop.interface clock-format 12h
