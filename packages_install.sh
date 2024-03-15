@@ -10,8 +10,10 @@ sudo apt update && sudo apt install -y \
     ripgrep \
     tree \
     nnn \
+    synaptic \
     tmux \
-    ubuntu-restricted-extras
+    ubuntu-restricted-extras \
+    xsel
 
 # Change origin to SSH
 script_dir=$(dirname $0)
