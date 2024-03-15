@@ -50,7 +50,7 @@ sudo apt-get install -y \
     docker-buildx-plugin \
     docker-compose-plugin
 
-(sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker) || true
+(sudo groupadd docker ; sudo usermod -aG docker $USER ; newgrp docker) || true
 
 # Nvidia Container Toolkit (?)
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
