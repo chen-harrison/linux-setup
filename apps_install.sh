@@ -23,6 +23,13 @@ sudo snap remove --purge firefox
 sudo apt install -y xul-ext-ubufox firefox
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
+# WideVineCdm plugin fix
+insert_string='owner @{HOME}/.{firefox,mozilla}/**/gmp-widevinecdm/*/lib*so m,'
+if ! grep -Fq "$insert_string" /etc/apparmor.d/usr.bin.firefox ; then
+    sudo sed -i "/# per-user firefox configuration/a\  $insert_string" /etc/apparmor.d/usr.bin.firefox
+    sudo apparmor_parser --replace /etc/apparmor.d/usr.bin.firefox
+fi
+
 # Notion
 sudo apt install -y epiphany-browser
 unzip notion.zip
