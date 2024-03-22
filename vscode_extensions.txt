@@ -12,4 +12,5 @@ ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 oderwat.indent-rainbow
 redhat.vscode-yaml
+timonwong.shellcheck
 vscode-icons-team.vscode-icons
