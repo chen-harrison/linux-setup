@@ -6,11 +6,7 @@ sudo apt update
 sudo apt install -y curl gpg
 
 # Foxglove Studio
-foxglove_deb=$(curl -s "https://api.github.com/repos/foxglove/studio/releases/latest" | grep '"browser_download_url":.*linux-amd64.deb' | sed -E 's/.*"([^"]+)".*/\1/')
-echo $foxglove_deb
-wget -O foxglove-studio.deb "$foxglove_deb"
-sudo dpkg -i foxglove-studio.deb
-rm foxglove-studio.deb
+firefox https://foxglove.dev/download
 
 # (Optional) uninstall Docker
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
@@ -49,8 +45,6 @@ sudo apt-get install -y \
     containerd.io \
     docker-buildx-plugin \
     docker-compose-plugin
-
-(sudo groupadd docker ; sudo usermod -aG docker $USER ; newgrp docker) || true
 
 # Nvidia Container Toolkit (?)
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
