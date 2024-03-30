@@ -71,5 +71,5 @@ wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_curr
 sudo dpkg -i chrome.deb
 rm chrome.deb
 
-# Dropbox (send to Download page)
+# Dropbox (send to download page)
 firefox https://www.dropbox.com/install-linux
