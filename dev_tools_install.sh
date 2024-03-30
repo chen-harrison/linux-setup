@@ -10,7 +10,7 @@ firefox https://foxglove.dev/download
 
 # (Optional) uninstall Docker
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
-if [[ "$REPLY" =~ ^[yY]$ ]] ; then
+if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
     echo "Attempting to uninstall Docker"
     sudo apt-get purge -y \
     docker-ce \
@@ -46,6 +46,8 @@ sudo apt-get install -y \
     docker-buildx-plugin \
     docker-compose-plugin
 
+(sudo groupadd docker ; sudo usermod -aG docker $USER ) || true
+
 # Nvidia Container Toolkit (?)
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
@@ -58,4 +60,9 @@ sudo apt-get install -y nvidia-container-toolkit
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 
-docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+# sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+
+read -r -p "The system needs to log out in order to apply changes and allow docker to run without sudo. Log out now? [y/N]? "
+if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
+    gnome-session-quit
+fi
