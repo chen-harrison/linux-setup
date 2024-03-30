@@ -5,23 +5,27 @@ sudo apt update && sudo apt install -y \
     python3-pip \
     git \
     gdb \
-    fzf \
     shellcheck \
     ripgrep \
     tree \
     nnn \
+    dconf-editor \
     synaptic \
     tmux \
     ubuntu-restricted-extras \
     xsel
 
-# Change origin to SSH
+# Change remote origin to SSH
 script_dir=$(dirname $0)
 cd $script_dir
 git remote set-url origin git@github.com:chen-harrison/linux-setup.git
 
-# TLDR
-sudo pip3 install tldr numpy
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --key-bindings --completion
+
+# tldr-pages + thefuck
+pip3 install --user tldr thefuck
 
 # SSH key
 read -r -p "Email address for SSH key: "

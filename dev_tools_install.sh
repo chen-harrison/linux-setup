@@ -5,7 +5,7 @@ sudo apt update
 # Necessary packages for installation
 sudo apt install -y curl gpg
 
-# Foxglove Studio
+# Foxglove Studio (send to download page)
 firefox https://foxglove.dev/download
 
 # (Optional) uninstall Docker
