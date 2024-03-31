@@ -3,6 +3,7 @@
 # Packages
 sudo apt update && sudo apt install -y \
     python3-pip \
+    fd \
     git \
     gdb \
     shellcheck \
@@ -19,6 +20,9 @@ sudo apt update && sudo apt install -y \
 script_dir=$(dirname $0)
 cd $script_dir
 git remote set-url origin git@github.com:chen-harrison/linux-setup.git
+
+# fd
+ln -s $(which fdfind) ~/.local/bin/fd
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
