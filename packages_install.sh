@@ -39,15 +39,6 @@ else
     echo "No input received, skipping ssh-keygen"
 fi
 
-# Dotfiles
-git clone https://github.com/chen-harrison/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-git remote set-url origin git@github.com:chen-harrison/dotfiles.git
-./install.sh
-
-# TPM
+# Tmux Plugin Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.tmux/plugins/tpm/bin/install_plugins
-
-# Nvidia drivers
-sudo ubuntu-drivers install
