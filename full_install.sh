@@ -7,6 +7,8 @@ cd $script_dir
 ./apps_install.sh
 ./settings_install.sh
 # ./dev_tools_install.sh
+./drivers_install.sh
+./dotfiles_install.sh
 
 echo \ "
 TODO:
