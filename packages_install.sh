@@ -3,7 +3,7 @@
 # Packages
 sudo apt update && sudo apt install -y \
     python3-pip \
-    fd \
+    fd-find \
     git \
     gdb \
     shellcheck \
