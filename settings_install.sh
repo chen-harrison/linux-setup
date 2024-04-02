@@ -51,4 +51,3 @@ if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
     echo "Fixing clock"
     timedatectl set-local-rtc 1 --adjust-system-clock
 fi
-
