@@ -38,6 +38,15 @@ gnome-extensions disable ding@rastersoft.com
 # Disable system bell sound
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
+# Restore terminal profile
+script_dir=$(dirname $0)
+cd $script_dir
+eval profile_id=$(gsettings get org.gnome.Terminal.ProfilesList default)
+sed -i "1s/^/[:${profile_id}]\n/" terminal_profile.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < terminal_profile.dconf
+tail -n +2 terminal_profile.dconf > temp.dconf  && mv temp.dconf terminal_profile.dconf
+cd - > /dev/null
+
 # Ubuntu 22.04 video playback fix: https://www.makeuseof.com/things-to-do-after-upgrading-to-ubuntu-2204-lts/
 read -r -p "Is this Ubuntu 22.04 [y/N]? "
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
