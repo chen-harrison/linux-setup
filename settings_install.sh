@@ -2,7 +2,7 @@
 
 # Set favorite apps
 gsettings set org.gnome.shell favorite-apps \
-"['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'code.desktop', 'org.gnome.Epiphany.WebApp-notion.desktop', 'spotify.desktop']"
+"['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'org.gnome.Epiphany.WebApp-notion.desktop', 'code.desktop', 'spotify.desktop']"
 
 # Automatic screen brightness OFF
 gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
@@ -46,6 +46,9 @@ sed -i "1s/^/[:${profile_id}]\n/" terminal_profile.dconf
 dconf load /org/gnome/terminal/legacy/profiles:/ < terminal_profile.dconf
 tail -n +2 terminal_profile.dconf > temp.dconf  && mv temp.dconf terminal_profile.dconf
 cd - > /dev/null
+
+# Turn off app notifications
+gsettings set org.gnome.desktop.notifications.application:/org/gnome/desktop/notifications/application/spotify/ enable false
 
 # Ubuntu 22.04 video playback fix: https://www.makeuseof.com/things-to-do-after-upgrading-to-ubuntu-2204-lts/
 read -r -p "Is this Ubuntu 22.04 [y/N]? "
