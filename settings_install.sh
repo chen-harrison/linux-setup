@@ -4,8 +4,9 @@
 gsettings set org.gnome.shell favorite-apps \
 "['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'org.gnome.Epiphany.WebApp-notion.desktop', 'code.desktop', 'spotify.desktop']"
 
-# Automatic screen brightness OFF
+# Screen brightness
 gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 # Color scheme
 gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
