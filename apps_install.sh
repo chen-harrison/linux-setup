@@ -37,6 +37,12 @@ sed -i "s/\$USER/$USER/g" org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.We
 mv org.gnome.Epiphany.WebApp-notion ~/.local/share/
 ln -s ~/.local/share/org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.WebApp-notion.desktop ~/.local/share/applications/org.gnome.Epiphany.WebApp-notion.desktop
 
+# melonDS
+unzip melonDS.zip
+sed -i "s/\$USER/$USER/g" melonDS/melonDS.desktop
+mv melonDS ~/.local/share/
+ln -s ~/.local/share/melonDS/melonDS.desktop ~/.local/share/applications/melonDS.desktop
+
 # Spotify
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
