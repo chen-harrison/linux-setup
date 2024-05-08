@@ -4,6 +4,7 @@
 sudo apt update && sudo apt install -y \
     python3-pip \
     fd-find \
+    ffmpeg \
     git \
     gdb \
     shellcheck \
@@ -30,6 +31,10 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # tldr-pages + thefuck
 pip3 install --user tldr thefuck
+
+# yt-dlp
+wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+chmod +x ~/.local/bin/yt-dlp
 
 # SSH key
 read -r -p "Email address for SSH key: "

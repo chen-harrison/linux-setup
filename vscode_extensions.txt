@@ -2,6 +2,7 @@ eamodio.gitlens
 Gruntfuggly.todo-tree
 johnpapa.vscode-peacock
 mathworks.language-matlab
+mechatroner.rainbow-csv
 ms-azuretools.vscode-docker
 ms-python.python
 ms-toolsai.jupyter
