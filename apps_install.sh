@@ -38,6 +38,7 @@ mv org.gnome.Epiphany.WebApp-notion ~/.local/share/
 ln -s ~/.local/share/org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.WebApp-notion.desktop ~/.local/share/applications/org.gnome.Epiphany.WebApp-notion.desktop
 
 # melonDS
+sudo apt install -y cmake extra-cmake-modules libcurl4-gnutls-dev libpcap0.8-dev libsdl2-dev qtbase5-dev qtbase5-private-dev qtmultimedia5-dev libarchive-dev libzstd-dev libslirp0
 unzip melonDS.zip
 sed -i "s/\$USER/$USER/g" melonDS/melonDS.desktop
 mv melonDS ~/.local/share/
