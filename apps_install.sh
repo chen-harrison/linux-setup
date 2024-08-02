@@ -9,19 +9,16 @@ sudo apt update
 sudo apt install -y curl wget gpg
 
 # Firefox (DEB)
-sudo add-apt-repository ppa:mozillateam/ppa
+sudo snap remove --purge firefox
+sudo install -d -m 0755 /etc/apt/keyrings
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
 echo '
 Package: *
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001
-
-Package: firefox
-Pin: version 1:1snap1-0ubuntu2
-Pin-Priority: -1
-' | sudo tee /etc/apt/preferences.d/mozilla-firefox
-sudo snap remove --purge firefox
-sudo apt update && sudo apt install -y --allow-downgrades firefox
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+sudo apt-get update && sudo apt-get install firefox
 
 # WideVineCdm plugin fix
 insert_string='owner @{HOME}/.{firefox,mozilla}/**/gmp-widevinecdm/*/lib*so m,'
