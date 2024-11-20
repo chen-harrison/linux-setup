@@ -13,6 +13,9 @@ sudo apt update && sudo apt install -y \
     nnn \
     dconf-editor \
     synaptic \
+    texlive \
+    texlive-formats-extra \
+    latexmk \
     tmux \
     ubuntu-restricted-extras \
     xsel

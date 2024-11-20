@@ -1,5 +1,6 @@
 eamodio.gitlens
 Gruntfuggly.todo-tree
+james-yu.latex-workshop
 johnpapa.vscode-peacock
 mathworks.language-matlab
 mechatroner.rainbow-csv
@@ -9,6 +10,7 @@ ms-iot.vscode-ros
 ms-python.python
 ms-toolsai.jupyter
 ms-vscode.cpptools-extension-pack
+ms-vscode.live-server
 ms-vscode.remote-explorer
 ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
