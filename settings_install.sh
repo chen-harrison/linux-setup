@@ -7,6 +7,7 @@ gsettings set org.gnome.shell favorite-apps \
 # Screen brightness
 gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2400
 
 # Color scheme
 gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
