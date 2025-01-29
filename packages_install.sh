@@ -3,19 +3,21 @@
 # Packages
 sudo apt update && sudo apt install -y \
     python3-pip \
+    dconf-editor \
     fd-find \
     ffmpeg \
     git \
     gdb \
-    shellcheck \
-    ripgrep \
-    tree \
+    gthumb \
+    imagemagick \
+    latexmk \
     nnn \
-    dconf-editor \
+    ripgrep \
+    shellcheck \
     synaptic \
     texlive \
     texlive-formats-extra \
-    latexmk \
+    tree \
     tmux \
     ubuntu-restricted-extras \
     xsel
@@ -38,6 +40,11 @@ pip3 install --user tldr thefuck
 # yt-dlp
 wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod +x ~/.local/bin/yt-dlp
+
+# tex-fmt
+wget https://github.com/WGUNDERWOOD/tex-fmt/releases/latest/download/tex-fmt-x86_64-linux.tar.gz
+tar -xvzf tex-fmt-x86_64-linux.tar.gz --directory=/usr/bin
+rm tex-fmt-x86_64-linux.tar.gz
 
 # SSH key
 read -r -p "Email address for SSH key: "
