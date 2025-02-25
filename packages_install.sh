@@ -64,7 +64,7 @@ git clone https://github.com/jarun/nnn.git
 cd nnn && git tag --sort=-creatordate | head -n1 | xargs git checkout
 sudo apt-get install pkg-config libncursesw5-dev libreadline-dev
 sudo make strip install O_NERD=1
-cd .. && rm -r nnn
+cd .. && rm -rf nnn
 
 # SSH key
 read -r -p "Email address for SSH key: "
