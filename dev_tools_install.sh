@@ -65,7 +65,7 @@ sudo systemctl restart docker
 
 # sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 
-read -r -p "The system needs to log out in order to apply changes and allow docker to run without sudo. Log out now? [y/N]? "
+read -r -p "The system needs to restart in order to apply changes and allow docker to run without sudo. Restart now? [y/N]? "
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
-    gnome-session-quit
+    sudo reboot
 fi
