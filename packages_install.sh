@@ -11,12 +11,12 @@ sudo apt update && sudo apt install -y \
     gthumb \
     imagemagick \
     latexmk \
-    nnn \
     ripgrep \
     shellcheck \
     synaptic \
     texlive \
     texlive-formats-extra \
+    trash-cli \
     tree \
     tmux \
     ubuntu-restricted-extras \
@@ -34,6 +34,12 @@ ln -s $(which fdfind) ~/.local/bin/fd
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --key-bindings --completion
 
+# fasd
+wget -O fasd.zip https://github.com/clvv/fasd/archive/refs/tags/1.0.1.zip
+unzip fasd.zip
+cd fasd-1.0.1 && sudo make install && cd ..
+rm -r fasd.zip fasd-1.0.1
+
 # tldr-pages + thefuck
 pip3 install --user tldr thefuck
 
@@ -45,6 +51,20 @@ chmod +x ~/.local/bin/yt-dlp
 wget https://github.com/WGUNDERWOOD/tex-fmt/releases/latest/download/tex-fmt-x86_64-linux.tar.gz
 tar -xvzf tex-fmt-x86_64-linux.tar.gz --directory=/usr/bin
 rm tex-fmt-x86_64-linux.tar.gz
+
+# Nerd Fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
+unzip UbuntuMono.zip -d UbuntuMono
+sudo mv UbuntuMono /usr/share/fonts/truetype
+fc-cache -f
+rm UbuntuMono.zip
+
+# nnn
+git clone https://github.com/jarun/nnn.git
+cd nnn && git tag --sort=-creatordate | head -n1 | xargs git checkout
+sudo apt-get install pkg-config libncursesw5-dev libreadline-dev
+sudo make strip install O_NERD=1
+cd .. && rm -r nnn
 
 # SSH key
 read -r -p "Email address for SSH key: "
