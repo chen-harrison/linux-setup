@@ -26,6 +26,8 @@ sudo apt update && sudo apt install -y \
 script_dir=$(dirname $0)
 cd $script_dir
 git remote set-url origin git@github.com:chen-harrison/linux-setup.git
+git config --local user.name "Harrison Chen"
+git config --local user.email "hchen.robotics@gmail.com"
 
 # fd
 ln -s $(which fdfind) ~/.local/bin/fd
