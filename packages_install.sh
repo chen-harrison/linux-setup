@@ -58,8 +58,11 @@ rm tex-fmt-x86_64-linux.tar.gz
 wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
 unzip UbuntuMono.zip -d UbuntuMono
 sudo mv UbuntuMono /usr/share/fonts/truetype
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DroidSansMono.zip
+unzip DroidSansMono.zip -d DroidSansMono
+sudo mv DroidSansMono /usr/share/fonts/opentype
 fc-cache -f
-rm UbuntuMono.zip
+rm UbuntuMono.zip DroidSansMono.zip
 
 # nnn
 git clone https://github.com/jarun/nnn.git
