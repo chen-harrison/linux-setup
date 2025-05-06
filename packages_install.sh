@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Packages
-sudo apt update && sudo apt install -y \
+sudo apt-get update && sudo apt-get install -y \
     python3-pip \
     dconf-editor \
     fd-find \
