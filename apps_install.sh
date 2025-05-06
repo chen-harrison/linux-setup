@@ -27,13 +27,6 @@ if ! grep -Fq "$insert_string" /etc/apparmor.d/usr.bin.firefox ; then
     sudo apparmor_parser --replace /etc/apparmor.d/usr.bin.firefox
 fi
 
-# Notion
-sudo apt install -y epiphany-browser
-unzip notion.zip
-sed -i "s/\$USER/$USER/g" org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.WebApp-notion.desktop
-mv org.gnome.Epiphany.WebApp-notion ~/.local/share/
-ln -s ~/.local/share/org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.WebApp-notion.desktop ~/.local/share/applications/org.gnome.Epiphany.WebApp-notion.desktop
-
 # melonDS
 sudo apt-get install -y cmake extra-cmake-modules libcurl4-gnutls-dev libpcap0.8-dev libsdl2-dev qtbase5-dev qtbase5-private-dev qtmultimedia5-dev libarchive-dev libzstd-dev libslirp0
 unzip melonDS.zip
@@ -64,6 +57,12 @@ cat ${script_dir}/vscode_extensions.txt | while read extension || [[ -n ${extens
 do
     code --install-extension $extension --force
 done
+
+# Obsidian
+obsidian_url=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
+wget -O obsidian.deb $obsidian_url
+sudo dpkg -i obsidian.deb
+rm obsidian.deb
 
 # Discord
 wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
