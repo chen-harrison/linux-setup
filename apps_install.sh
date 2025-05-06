@@ -3,10 +3,10 @@
 script_dir=$(dirname $0)
 cd $script_dir
 
-sudo apt update
+sudo apt-get update
 
 # Necessary packages for installation
-sudo apt install -y curl wget gpg
+sudo apt-get install -y curl wget gpg
 
 # Firefox (DEB)
 sudo snap remove --purge firefox
@@ -35,7 +35,7 @@ mv org.gnome.Epiphany.WebApp-notion ~/.local/share/
 ln -s ~/.local/share/org.gnome.Epiphany.WebApp-notion/org.gnome.Epiphany.WebApp-notion.desktop ~/.local/share/applications/org.gnome.Epiphany.WebApp-notion.desktop
 
 # melonDS
-sudo apt install -y cmake extra-cmake-modules libcurl4-gnutls-dev libpcap0.8-dev libsdl2-dev qtbase5-dev qtbase5-private-dev qtmultimedia5-dev libarchive-dev libzstd-dev libslirp0
+sudo apt-get install -y cmake extra-cmake-modules libcurl4-gnutls-dev libpcap0.8-dev libsdl2-dev qtbase5-dev qtbase5-private-dev qtmultimedia5-dev libarchive-dev libzstd-dev libslirp0
 unzip melonDS.zip
 sed -i "s/\$USER/$USER/g" melonDS/melonDS.desktop
 mv melonDS ~/.local/share/
@@ -44,10 +44,10 @@ ln -s ~/.local/share/melonDS/melonDS.desktop ~/.local/share/applications/melonDS
 # Spotify
 curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt update && sudo apt install -y spotify-client
+sudo apt-get update && sudo apt-get install -y spotify-client
 
 # VLC
-sudo apt install -y vlc
+sudo apt-get install -y vlc
 
 # VS Code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -55,9 +55,9 @@ sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
 
-sudo apt install -y apt-transport-https
-sudo apt update
-sudo apt install -y code
+sudo apt-get install -y apt-transport-https
+sudo apt-get update
+sudo apt-get install -y code
 
 # VS Code Extensions
 cat ${script_dir}/vscode_extensions.txt | while read extension || [[ -n ${extension} ]];

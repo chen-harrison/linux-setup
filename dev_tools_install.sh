@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-sudo apt update
+sudo apt-get update
 
 # Necessary packages for installation
-sudo apt install -y curl gpg
+sudo apt-get install -y curl gpg
 
 # Foxglove Studio (send to download page)
 firefox https://foxglove.dev/download
