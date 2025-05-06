@@ -8,7 +8,7 @@ sudo apt-get install -y curl gpg
 # Foxglove Studio (send to download page)
 firefox https://foxglove.dev/download
 
-# (Optional) uninstall Docker
+# Uninstall Docker (optional)
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
     echo "Attempting to uninstall Docker"
@@ -27,7 +27,6 @@ fi
 # Install Docker
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
-sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -51,7 +50,7 @@ sudo apt-get install -y \
 # LazyDocker
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
-# Nvidia Container Toolkit (?)
+# Nvidia Container Toolkit
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
         sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
