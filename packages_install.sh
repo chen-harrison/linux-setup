@@ -81,4 +81,6 @@ fi
 
 # Tmux Plugin Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# The dotfile isn't in place when this called, so doesn't work as intended
 ~/.tmux/plugins/tpm/bin/install_plugins
+~/.tmux/plugins/tpm/bin/update_plugins all
