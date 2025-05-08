@@ -3,10 +3,12 @@
 sudo apt-get update
 
 # Necessary packages for installation
-sudo apt-get install -y curl gpg
+sudo apt-get install -y curl gpg wget
 
 # Foxglove Studio (send to download page)
-firefox https://foxglove.dev/download
+wget -O foxglove.deb https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
+sudo dpkg -i foxglove.deb
+rm foxglove.deb
 
 # Uninstall Docker (optional)
 read -r -p "Do you want to uninstall an existing version of Docker [y/N]? "
