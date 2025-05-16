@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+# Make sure this directory exists
+mkdir -p ~/.local/bin
+
 # Packages
 sudo apt-get update && sudo apt-get install -y \
     python3-pip \
     dconf-editor \
-    fd-find \
     ffmpeg \
     git \
     gdb \
@@ -30,6 +32,7 @@ git config --local user.name "Harrison Chen"
 git config --local user.email "hchen.robotics@gmail.com"
 
 # fd
+sudo apt-get install -y fd-find
 ln -s $(which fdfind) ~/.local/bin/fd
 
 # fzf
@@ -42,8 +45,12 @@ unzip fasd.zip
 cd fasd-1.0.1 && sudo make install && cd ..
 rm -r fasd.zip fasd-1.0.1
 
-# tldr-pages + thefuck
-pip3 install --user tldr thefuck
+# tldr-pages
+sudo apt-get install pipx
+pipx ensurepath
+pipx install tldr
+
+# TODO: fix thefuck installation
 
 # yt-dlp
 wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
@@ -67,7 +74,7 @@ rm UbuntuMono.zip DroidSansMono.zip
 # nnn
 git clone https://github.com/jarun/nnn.git
 cd nnn && git tag --sort=-creatordate | head -n1 | xargs git checkout
-sudo apt-get install pkg-config libncursesw5-dev libreadline-dev
+sudo apt-get install -y pkg-config libncursesw5-dev libreadline-dev
 sudo make strip install O_NERD=1
 cd .. && rm -rf nnn
 

@@ -11,7 +11,7 @@ cd $script_dir
 ./dotfiles_install.sh
 
 echo \ "
-TODO:
+To-Do:
 - Restart to apply Nvidia drivers
 - Add public SSH keys where needed (e.g. GitHub)
 - ./dev_tools_install.sh
