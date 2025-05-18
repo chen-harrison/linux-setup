@@ -25,15 +25,14 @@ sudo apt-get update && sudo apt-get install -y \
     xsel
 
 # Change remote origin to SSH
-script_dir=$(dirname $0)
-cd $script_dir
+cd $(dirname $0)
 git remote set-url origin git@github.com:chen-harrison/linux-setup.git
 git config --local user.name "Harrison Chen"
 git config --local user.email "hchen.robotics@gmail.com"
 
 # fd
 sudo apt-get install -y fd-find
-ln -s $(which fdfind) ~/.local/bin/fd
+ln -s "$(which fdfind)" ~/.local/bin/fd
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -58,7 +57,7 @@ chmod +x ~/.local/bin/yt-dlp
 
 # tex-fmt
 wget https://github.com/WGUNDERWOOD/tex-fmt/releases/latest/download/tex-fmt-x86_64-linux.tar.gz
-tar -xvzf tex-fmt-x86_64-linux.tar.gz --directory=/usr/bin
+sudo tar -xvzf tex-fmt-x86_64-linux.tar.gz --directory=/usr/bin
 rm tex-fmt-x86_64-linux.tar.gz
 
 # Nerd Fonts
