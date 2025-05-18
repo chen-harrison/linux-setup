@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-script_dir=$(dirname $0)
-cd $script_dir
+cd "$(dirname $0)"
 
 ./packages_install.sh
 ./apps_install.sh
