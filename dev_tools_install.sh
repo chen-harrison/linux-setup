@@ -5,7 +5,7 @@ sudo apt-get update
 # Necessary packages for installation
 sudo apt-get install -y curl gpg wget
 
-# Foxglove Studio (send to download page)
+# Foxglove Studio
 wget -O foxglove.deb https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
 sudo dpkg -i foxglove.deb
 rm foxglove.deb

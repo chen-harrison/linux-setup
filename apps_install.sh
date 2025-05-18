@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-script_dir=$(dirname $0)
-cd $script_dir
+cd "$(dirname $0)"
 
 sudo apt-get update
 
@@ -50,7 +49,7 @@ sudo apt-get update
 sudo apt-get install -y code
 
 # VS Code Extensions
-cat ${script_dir}/vscode_extensions.txt | while read extension || [[ -n ${extension} ]];
+cat vscode_extensions.txt | while read extension || [[ -n ${extension} ]];
 do
     code --install-extension $extension --force
 done
