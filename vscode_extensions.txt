@@ -6,7 +6,6 @@ mathworks.language-matlab
 mechatroner.rainbow-csv
 mhutchie.git-graph
 ms-azuretools.vscode-containers
-ms-iot.vscode-ros
 ms-python.python
 ms-toolsai.jupyter
 ms-vscode.cpptools-extension-pack
