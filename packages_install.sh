@@ -26,12 +26,6 @@ sudo apt-get update && sudo apt-get install -y \
     ubuntu-restricted-extras \
     xsel
 
-# Change remote origin to SSH
-cd $(dirname $0)
-git remote set-url origin git@github.com:chen-harrison/linux-setup.git
-git config --local user.name "Harrison Chen"
-git config --local user.email "hchen.robotics@gmail.com"
-
 # fd
 sudo apt-get install -y fd-find
 ln -s "$(which fdfind)" ~/.local/bin/fd
