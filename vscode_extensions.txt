@@ -1,4 +1,3 @@
-eamodio.gitlens
 Gruntfuggly.todo-tree
 james-yu.latex-workshop
 johnpapa.vscode-peacock
