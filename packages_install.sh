@@ -32,7 +32,7 @@ ln -s "$(which fdfind)" ~/.local/bin/fd
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion
+~/.fzf/install --key-bindings --completion --no-update-rc
 
 # fasd
 wget -O fasd.zip https://github.com/clvv/fasd/archive/refs/tags/1.0.1.zip
