@@ -1,6 +1,7 @@
 Gruntfuggly.todo-tree
 james-yu.latex-workshop
 johnpapa.vscode-peacock
+llvm-vs-code-extensions.vscode-clangd
 mathworks.language-matlab
 mechatroner.rainbow-csv
 mhutchie.git-graph
