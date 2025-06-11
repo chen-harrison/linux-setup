@@ -11,6 +11,7 @@ git config --local user.email "hchen.robotics@gmail.com"
 read -r -p "Is this installation for personal (not professional) use [y/N]? " personal
 
 ./packages_install.sh
+./terminal_tools_install.sh
 ./apps_install.sh
 ./settings_install.sh
 ./dev_tools_install.sh
