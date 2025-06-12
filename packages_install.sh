@@ -23,6 +23,16 @@ sudo apt-get update && sudo apt-get install -y \
     ubuntu-restricted-extras \
     xsel
 
+# clangd
+clangd_url=$(curl -s https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep 'clangd-linux')
+clangd_version=$(curl -s "https://api.github.com/repos/clangd/clangd/releases/latest" | jq -r '.tag_name')
+wget -O clangd.zip $clangd_url
+unzip clangd.zip
+sudo cp clangd_$clangd_version/bin/clangd /usr/local/bin
+sudo cp -r clangd_$clangd_version/lib/clang /usr/local/lib
+sudo ln -sf /usr/local/bin/clangd /usr/bin/clangd
+rm -r clangd.zip clangd_$clangd_version
+
 # yt-dlp
 wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod +x ~/.local/bin/yt-dlp
