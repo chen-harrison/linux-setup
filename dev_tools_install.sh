@@ -47,7 +47,7 @@ sudo apt-get install -y \
     docker-buildx-plugin \
     docker-compose-plugin
 
-(sudo groupadd docker ; sudo usermod -aG docker $USER ) || true
+(sudo groupadd docker ; sudo usermod -aG docker "$USER") || true
 
 # Lazygit
 mkdir -p ~/.local/bin
