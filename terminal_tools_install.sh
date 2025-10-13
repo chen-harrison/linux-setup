@@ -36,6 +36,7 @@ cd nnn && git tag --sort=-creatordate | head -n1 | xargs git checkout
 sudo apt-get install -y pkg-config libncursesw5-dev libreadline-dev
 sudo make strip install O_NERD=1
 cd .. && rm -rf nnn
+sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 
 # tldr-pages
 sudo apt-get install pipx
