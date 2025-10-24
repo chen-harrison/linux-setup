@@ -3,9 +3,24 @@
 # Make sure this directory exists
 mkdir -p ~/.local/bin
 
+# Nerd Fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
+unzip UbuntuMono.zip -d UbuntuMono
+mkdir -p /usr/share/fonts/truetype
+sudo mv UbuntuMono /usr/share/fonts/truetype
+rm UbuntuMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DroidSansMono.zip
+unzip DroidSansMono.zip -d DroidSansMono
+mkdir -p /usr/share/fonts/opentype
+sudo mv DroidSansMono /usr/share/fonts/opentype
+rm DroidSansMono.zip
+fc-cache -f
+
 # fd
-sudo apt-get install -y fd-find
-ln -s "$(which fdfind)" ~/.local/bin/fd
+fd_url=$(curl -s https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e fd_.*amd64.deb)
+wget -O fd.deb "$fd_url"
+dpkg -i fd.deb
+rm fd.deb
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -17,25 +32,12 @@ unzip fasd.zip
 cd fasd-1.0.1 && sudo make install && cd ..
 rm -r fasd.zip fasd-1.0.1
 
-# Nerd Fonts
-mkdir -p /usr/share/fonts/truetype
-wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
-unzip UbuntuMono.zip -d UbuntuMono
-sudo mv UbuntuMono /usr/share/fonts/truetype
-rm UbuntuMono.zip
-mkdir -p /usr/share/fonts/opentype
-wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DroidSansMono.zip
-unzip DroidSansMono.zip -d DroidSansMono
-sudo mv DroidSansMono /usr/share/fonts/opentype
-rm DroidSansMono.zip
-fc-cache -f
-
 # nnn
-git clone https://github.com/jarun/nnn.git
-cd nnn && git tag --sort=-creatordate | head -n1 | xargs git checkout
-sudo apt-get install -y pkg-config libncursesw5-dev libreadline-dev
-sudo make strip install O_NERD=1
-cd .. && rm -rf nnn
+nnn_url=$(curl -s https://api.github.com/repos/jarun/nnn/releases/latest | jq -r '.assets[].browser_download_url' | grep nerd-static)
+wget -O nnn.tar.gz "$nnn_url"
+tar -xzf nnn.tar.gz
+sudo mv nnn-nerd-static /usr/local/bin/nnn
+rm nnn.tar.gz
 sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 
 # tldr-pages
