@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Make sure this directory exists
 mkdir -p ~/.local/bin
