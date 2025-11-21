@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # melonDS
 sudo apt-get install -y cmake extra-cmake-modules libcurl4-gnutls-dev libpcap0.8-dev libsdl2-dev qtbase5-dev qtbase5-private-dev qtmultimedia5-dev libarchive-dev libzstd-dev libslirp0
