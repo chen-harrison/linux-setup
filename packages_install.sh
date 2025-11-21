@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Packages
 sudo apt-get update && sudo apt-get install -y \

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Set favorite apps
 gsettings set org.gnome.shell favorite-apps \
