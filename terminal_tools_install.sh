@@ -18,10 +18,22 @@ rm DroidSansMono.zip
 fc-cache -f
 
 # fd
-fd_url=$(curl -s https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e fd_.*amd64.deb)
+fd_url=$(curl -s https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "fd_.*amd64.deb")
 wget -O fd.deb "$fd_url"
 dpkg -i fd.deb
 rm fd.deb
+
+# bat
+bat_url=$(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "bat_.*amd64.deb")
+wget -O bat.deb "$bat_url"
+dpkg -i bat.deb
+rm bat.deb
+
+# ncdu
+ncdu_url=$(curl -s https://dev.yorhel.nl/download | grep -oP 'ncdu-[\d.]+-linux-x86_64\.tar\.gz' | sort -V | tail -1)
+wget -O ncdu.tar.gz "$ncdu_url"
+sudo tar -xzf ncdu.tar.gz -C /usr/local/bin ncdu
+rm ncdu.tar.gz
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
