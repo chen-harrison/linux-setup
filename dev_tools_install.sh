@@ -50,7 +50,7 @@ sudo systemctl restart docker
 mkdir -p ~/.local/bin
 lazygit_version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${lazygit_version}/lazygit_${lazygit_version}_Linux_x86_64.tar.gz"
-tar -xf lazygit.tar.gz -C ~/.local/bin lazygit
+tar -xzf lazygit.tar.gz -C ~/.local/bin lazygit
 rm lazygit.tar.gz
 
 # Lazydocker

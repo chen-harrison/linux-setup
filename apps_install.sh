@@ -17,7 +17,7 @@ echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://package
 echo -e "Package: firefox\nPin: release o=Ubuntu\nPin-Priority: -1" | sudo tee /etc/apt/preferences.d/mozilla
 sudo apt-get update && sudo apt-get install -y firefox
 
-# # WideVineCdm plugin fix
+# # WideVineCdm plugin fix for Firefox
 # insert_string='owner @{HOME}/.{firefox,mozilla}/**/gmp-widevinecdm/*/lib*so m,'
 # if ! grep -Fq "$insert_string" /etc/apparmor.d/usr.bin.firefox ; then
 #     sudo sed -i "/# per-user firefox configuration/a\  $insert_string" /etc/apparmor.d/usr.bin.firefox
@@ -53,11 +53,6 @@ obsidian_url=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases
 wget -O obsidian.deb $obsidian_url
 sudo dpkg -i obsidian.deb
 rm obsidian.deb
-
-# # Chrome
-# wget -O chrome.deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-# sudo dpkg -i chrome.deb
-# rm chrome.deb
 
 # Dropbox (send to download page)
 firefox https://www.dropbox.com/install-linux
