@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")"
 
 # Change remote origin to SSH + configure user
-cd $(dirname $0)
+cd "$(dirname "$0")"
 git remote set-url origin git@github.com:chen-harrison/linux-setup.git
 git config --local user.name "Harrison Chen"
 git config --local user.email "hchen.robotics@gmail.com"
