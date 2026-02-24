@@ -9,8 +9,9 @@ git remote set-url origin git@github.com:chen-harrison/linux-setup.git
 git config --local user.name "Harrison Chen"
 git config --local user.email "hchen.robotics@gmail.com"
 
-read -r -p "Is this installation for personal (not professional) use [y/N]? " personal
+read -r -p "Is this installation for personal (not professional) use [y/N]? "
 
+# Authenticate with sudo at the beginning, which is applied elsewhere
 sudo -v
 
 ./packages_install.sh
@@ -21,7 +22,7 @@ sudo -v
 ./drivers_install.sh
 ./dotfiles_install.sh
 
-if [[ "$personal" =~ ^[yY]([eE][sS])?$ ]] ; then
+if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
     ./personal_install.sh
 fi
 
