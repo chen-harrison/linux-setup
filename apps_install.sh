@@ -25,8 +25,8 @@ sudo apt-get update && sudo apt-get install -y firefox
 # fi
 
 # Spotify
-curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+curl -sS https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update && sudo apt-get install -y spotify-client
 
 # VLC
@@ -50,9 +50,12 @@ done
 
 # Obsidian
 obsidian_url=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
-wget -O obsidian.deb $obsidian_url
+wget -O obsidian.deb "$obsidian_url"
 sudo dpkg -i obsidian.deb
 rm obsidian.deb
 
-# Dropbox (send to download page)
-firefox https://www.dropbox.com/install-linux
+# Dropbox
+dropbox_url=$(curl -s https://linux.dropbox.com/packages/ubuntu | grep -oP 'dropbox_[\d.]+_amd64\.deb' | sort -V | tail -1)
+wget -O dropbox.deb "$dropbox_url"
+sudo dpkg -i dropbox.deb
+rm dropbox.deb
