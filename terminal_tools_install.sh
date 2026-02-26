@@ -37,6 +37,7 @@ rm ncdu.tar.gz
 
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+wget -O ~/.fzf/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh
 ~/.fzf/install --key-bindings --completion
 
 # fasd
