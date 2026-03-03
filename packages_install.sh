@@ -30,8 +30,8 @@ packages=(
 sudo apt-get update && sudo apt-get install -y "${packages[@]}"
 
 # clangd
-clangd_url=$(curl -s https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep 'clangd-linux')
-clangd_version=$(curl -s "https://api.github.com/repos/clangd/clangd/releases/latest" | jq -r '.tag_name')
+clangd_url=$(curl -fsSL https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep 'clangd-linux')
+clangd_version=$(curl -fsSL "https://api.github.com/repos/clangd/clangd/releases/latest" | jq -r '.tag_name')
 wget -O clangd.zip "$clangd_url"
 unzip clangd.zip
 sudo cp "clangd_$clangd_version/bin/clangd" /usr/local/bin

@@ -57,7 +57,7 @@ rm lazygit.tar.gz
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
 # Mutagen
-mutagen_url=$(curl -s https://api.github.com/repos/mutagen-io/mutagen/releases/latest | jq -r '.assets[].browser_download_url' | grep linux_amd64)
+mutagen_url=$(curl -fsSL https://api.github.com/repos/mutagen-io/mutagen/releases/latest | jq -r '.assets[].browser_download_url' | grep linux_amd64)
 wget -O mutagen.tar.gz "$mutagen_url"
 sudo tar -xzf mutagen.tar.gz -C /usr/local/bin
 rm mutagen.tar.gz

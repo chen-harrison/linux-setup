@@ -49,7 +49,7 @@ do
 done
 
 # Obsidian
-obsidian_url=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
+obsidian_url=$(curl -fsSL https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
 wget -O obsidian.deb "$obsidian_url"
 sudo dpkg -i obsidian.deb
 rm obsidian.deb
