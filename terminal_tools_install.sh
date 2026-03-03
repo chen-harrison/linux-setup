@@ -30,8 +30,8 @@ dpkg -i bat.deb
 rm bat.deb
 
 # ncdu
-ncdu_url=$(curl -s https://dev.yorhel.nl/download | grep -oP 'ncdu-[\d.]+-linux-x86_64\.tar\.gz' | sort -V | tail -1)
-wget -O ncdu.tar.gz "$ncdu_url"
+ncdu_tarball=$(curl -fsSL https://dev.yorhel.nl/download | grep -oP 'ncdu-[\d.]+-linux-x86_64\.tar\.gz' | sort -V | tail -1)
+wget -O ncdu.tar.gz "https://dev.yorhel.nl/download/$ncdu_tarball"
 sudo tar -xzf ncdu.tar.gz -C /usr/local/bin ncdu
 rm ncdu.tar.gz
 
