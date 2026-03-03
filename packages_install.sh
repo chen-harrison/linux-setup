@@ -58,9 +58,3 @@ fi
 
 # git-credential-libsecret
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
-
-# Tmux Plugin Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# TODO: The dotfile isn't in place when this called, so doesn't work as intended
-~/.tmux/plugins/tpm/bin/install_plugins
-~/.tmux/plugins/tpm/bin/update_plugins all
