@@ -18,13 +18,13 @@ rm DroidSansMono.zip
 fc-cache -f
 
 # fd
-fd_url=$(curl -s https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "fd_.*amd64.deb")
+fd_url=$(curl -fsSL https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "fd_.*amd64.deb")
 wget -O fd.deb "$fd_url"
 dpkg -i fd.deb
 rm fd.deb
 
 # bat
-bat_url=$(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "bat_.*amd64.deb")
+bat_url=$(curl -fsSL https://api.github.com/repos/sharkdp/bat/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "bat_.*amd64.deb")
 wget -O bat.deb "$bat_url"
 dpkg -i bat.deb
 rm bat.deb
@@ -47,7 +47,7 @@ cd fasd-1.0.1 && sudo make install && cd ..
 rm -r fasd.zip fasd-1.0.1
 
 # nnn
-nnn_url=$(curl -s https://api.github.com/repos/jarun/nnn/releases/latest | jq -r '.assets[].browser_download_url' | grep nerd-static)
+nnn_url=$(curl -fsSL https://api.github.com/repos/jarun/nnn/releases/latest | jq -r '.assets[].browser_download_url' | grep nerd-static)
 wget -O nnn.tar.gz "$nnn_url"
 tar -xzf nnn.tar.gz
 sudo mv nnn-nerd-static /usr/local/bin/nnn
