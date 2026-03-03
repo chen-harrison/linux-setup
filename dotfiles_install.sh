@@ -10,3 +10,8 @@ git config --local user.name "Harrison Chen"
 git config --local user.email "hchen.robotics@gmail.com"
 
 ./install.sh
+
+# Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
+~/.tmux/plugins/tpm/bin/update_plugins all
