@@ -43,10 +43,10 @@ rm -r clangd.zip "clangd_$clangd_version"
 wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod +x ~/.local/bin/yt-dlp
 
-# tex-fmt
-wget https://github.com/WGUNDERWOOD/tex-fmt/releases/latest/download/tex-fmt-x86_64-linux.tar.gz
-sudo tar -xvzf tex-fmt-x86_64-linux.tar.gz --directory=/usr/bin
-rm tex-fmt-x86_64-linux.tar.gz
+# latexindent
+wget https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexindent-linux
+chmod +x latexindent-linux
+sudo mv latexindent-linux /usr/local/bin/latexindent
 
 # SSH key
 read -r -p "Email address for SSH key: " EMAIL
