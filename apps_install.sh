@@ -55,7 +55,7 @@ sudo dpkg -i obsidian.deb
 rm obsidian.deb
 
 # Dropbox
-dropbox_url=$(curl -s https://linux.dropbox.com/packages/ubuntu | grep -oP 'dropbox_[\d.]+_amd64\.deb' | sort -V | tail -1)
-wget -O dropbox.deb "$dropbox_url"
+dropbox_deb=$(curl -fsSL https://linux.dropbox.com/packages/ubuntu | grep -oP 'dropbox_[\d.]+_amd64\.deb' | sort -V | tail -1)
+wget -O dropbox.deb "https://linux.dropbox.com/packages/ubuntu/$dropbox_deb"
 sudo dpkg -i dropbox.deb
 rm dropbox.deb
