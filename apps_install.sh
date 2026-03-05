@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")"
 
 sudo apt-get update
 
@@ -43,9 +43,9 @@ sudo apt-get update
 sudo apt-get install -y code
 
 # VS Code Extensions
-cat vscode_extensions.txt | while read extension || [[ -n ${extension} ]];
+cat vscode_extensions.txt | while read -r extension || [[ -n ${extension} ]];
 do
-    code --install-extension $extension --force
+    code --install-extension "$extension" --force
 done
 
 # Obsidian
