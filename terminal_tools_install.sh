@@ -59,6 +59,9 @@ sudo apt-get install pipx
 pipx ensurepath
 pipx install tldr
 
+# pre-commit
+pipx install pre-commit
+
 # TODO: fix thefuck installation
 
 source ~/.profile
