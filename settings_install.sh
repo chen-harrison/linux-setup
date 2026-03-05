@@ -42,8 +42,8 @@ gnome-extensions disable ding@rastersoft.com
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
 # Restore terminal profile
-cd "$(dirname $0)"
-eval profile_id="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+cd "$(dirname "$0")"
+profile_id="$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d "'")"
 sed -i "1s/^/[:${profile_id}]\n/" terminal_profile.dconf
 dconf load /org/gnome/terminal/legacy/profiles:/ < terminal_profile.dconf
 tail -n +2 terminal_profile.dconf > temp.dconf  && mv temp.dconf terminal_profile.dconf
