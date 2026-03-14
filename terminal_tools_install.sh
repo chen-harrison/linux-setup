@@ -59,7 +59,8 @@ sudo apt-get install pipx
 pipx ensurepath
 pipx install tldr
 
-# pre-commit
+# prek/pre-commit
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/latest/download/prek-installer.sh | sh
 pipx install pre-commit
 
 # TODO: fix thefuck installation
