@@ -56,6 +56,12 @@ rm lazygit.tar.gz
 # Lazydocker
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
+# Delta
+delta_url=$(curl -fsSL https://api.github.com/repos/dandavison/delta/releases/latest | jq -r '.assets[].browser_download_url' | grep -E 'git-delta_[0-9\.]+_amd64.deb')
+wget -O delta.deb "$delta_url"
+sudo dpkg -i delta.deb
+rm delta.deb
+
 # Mutagen
 mutagen_url=$(curl -fsSL https://api.github.com/repos/mutagen-io/mutagen/releases/latest | jq -r '.assets[].browser_download_url' | grep linux_amd64)
 wget -O mutagen.tar.gz "$mutagen_url"
