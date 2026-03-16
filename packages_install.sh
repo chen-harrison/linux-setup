@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# git PPA
+sudo add-apt-repository -y ppa:git-core/ppa
+
 # Packages
 packages=(
     python3-pip                     # Python package manager
@@ -28,6 +31,10 @@ packages=(
 )
 
 sudo apt-get update && sudo apt-get install -y "${packages[@]}"
+
+# git-lfs
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
 
 # clangd
 clangd_url=$(curl -fsSL https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep 'clangd-linux')
