@@ -68,7 +68,7 @@ wget -O mutagen.tar.gz "$mutagen_url"
 sudo tar -xzf mutagen.tar.gz -C /usr/local/bin
 rm mutagen.tar.gz
 
-read -r -p "The system needs to restart in order to apply changes and allow docker to run without sudo. Restart now? [y/N]? "
+read -r -p "The system needs to restart in order to apply changes and allow docker to run without sudo. Restart now? [y/N] "
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
     sudo reboot
 fi
