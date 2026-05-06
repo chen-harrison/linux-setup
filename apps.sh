@@ -32,21 +32,39 @@ sudo apt-get update && sudo apt-get install -y spotify-client
 # VLC
 sudo apt-get install -y vlc
 
-# VS Code
+# VS Code + Extensions
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
-
 sudo apt-get install -y apt-transport-https
 sudo apt-get update
 sudo apt-get install -y code
 
-# VS Code Extensions
-cat vscode_extensions.txt | while read -r extension || [[ -n ${extension} ]];
+cat vsc_extensions.txt | while read -r extension || [[ -n ${extension} ]];
 do
     code --install-extension "$extension" --force
 done
+
+# VSCodium + Extensions + Icon Change
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' \
+| sudo tee /etc/apt/sources.list.d/vscodium.sources
+sudo apt-get update && sudo apt-get install -y codium
+
+cat vsc_extensions.txt | while read -r extension || [[ -n ${extension} ]];
+do
+    codium --install-extension "$extension" --force
+done
+
+wget -O /tmp/vscodium.svg "https://raw.githubusercontent.com/VSCodium/vscodium/master/icons/stable/codium_cnl.svg"
+sudo apt install librsvg2-bin
+rsvg-convert -w 512 -h 512 /tmp/vscodium.svg -o /tmp/vscodium.png
+sudo cp /usr/share/pixmaps/vscodium.png /usr/share/pixmaps/vscodium.png.bak
+sudo cp /tmp/vscodium.png /usr/share/pixmaps/vscodium.png
+rm /tmp/vscodium.svg /tmp/vscodium.png
 
 # Obsidian
 obsidian_url=$(curl -fsSL https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
