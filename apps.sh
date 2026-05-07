@@ -77,3 +77,19 @@ dropbox_deb=$(curl -fsSL https://linux.dropbox.com/packages/ubuntu | grep -oP 'd
 wget -O dropbox.deb "https://linux.dropbox.com/packages/ubuntu/$dropbox_deb"
 sudo dpkg -i dropbox.deb
 rm dropbox.deb
+
+# Ungoogled Chromium
+wget https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.6_all.deb
+sudo apt install ./xtradeb-apt-source_0.6_all.deb
+rm ./xtradeb-apt-source_0.6_all.deb
+sudo apt-get update && sudo apt-get install ungoogled-chromium
+
+sudo tee /etc/apt/preferences.d/xtradeb <<EOF
+Package: *
+Pin: release o=LP-PPA-xtradeb-apps
+Pin-Priority: 1
+
+Package: ungoogled-chromium*
+Pin: release o=LP-PPA-xtradeb-apps
+Pin-Priority: 500
+EOF
