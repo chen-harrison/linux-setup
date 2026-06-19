@@ -15,6 +15,7 @@ packages=(
     htop                            # System monitor for CPU, memory, swap
     imagemagick                     # Image conversion (?)
     ibus-pinyin                     # Chinese keyboard
+    jq                              # JSON parser
     latexmk                         # LaTeX
     libsecret-1-dev                 # git-credential-libsecret dependency
     libsecret-tools                 # CLI interface for gnome-keyring
@@ -47,6 +48,7 @@ sudo ln -sf /usr/local/bin/clangd /usr/bin/clangd
 rm -r clangd.zip "clangd_${clangd_version}"
 
 # yt-dlp
+mkdir -p ~/.local/bin
 wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 chmod +x ~/.local/bin/yt-dlp
 
@@ -55,6 +57,9 @@ wget https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexin
 chmod +x latexindent-linux
 sudo mv latexindent-linux /usr/local/bin/latexindent
 
+# git-credential-libsecret
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+
 # SSH key
 read -r -p "Email address for SSH key: " EMAIL
 if [[ $EMAIL ]] ; then
@@ -62,6 +67,3 @@ if [[ $EMAIL ]] ; then
 else
     echo "No input received, skipping ssh-keygen"
 fi
-
-# git-credential-libsecret
-sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
