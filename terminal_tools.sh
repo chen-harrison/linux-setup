@@ -66,10 +66,13 @@ tmux_url=$(curl -fsSL https://api.github.com/repos/tmux/tmux-builds/releases/lat
 wget -O tmux.tar.gz "$tmux_url"
 sudo tar -xzf tmux.tar.gz -C /usr/bin tmux
 
-# uv + tldr + pre-commit
+# prek
+prek_url=$(curl -fsSL https://api.github.com/repos/j178/prek/releases/latest | jq -r '.assets[].browser_download_url' | grep 'prek-installer.sh')
+curl --proto '=https' --tlsv1.2 -LsSf "$prek_url" | sh
+
+# uv + tldr
 curl -LsSf https://astral.sh/uv/install.sh | sh
 "${HOME}"/.local/bin/uv tool install tldr
-"${HOME}"/.local/bin/uv tool install pre-commit --with pre-commit-uv
 )
 
 # TODO: fix thefuck installation
