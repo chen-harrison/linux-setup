@@ -61,7 +61,7 @@ sudo mv latexindent-linux /usr/local/bin/latexindent
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
 
 # SSH key
-read -r -p "Email address for SSH key: " EMAIL
+read -rp "Email address for SSH key: " EMAIL
 if [[ $EMAIL ]] ; then
     ssh-keygen -t ed25519 -C "$EMAIL"
 else
