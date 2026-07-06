@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-sudo apt-get update
-
-# Necessary packages for installation
-sudo apt-get install -y curl gpg wget
+# Installation requirements
+sudo apt-get update && sudo apt-get install -y \
+    curl \
+    gpg \
+    wget
 
 # Foxglove Studio
 wget -O foxglove.deb https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb

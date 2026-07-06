@@ -3,10 +3,11 @@ set -e
 
 cd "$(dirname "$0")"
 
-sudo apt-get update
-
-# Necessary packages for installation
-sudo apt-get install -y curl wget gpg
+# Installation requirements
+sudo apt-get update && sudo apt-get install -y \
+    curl \
+    gpg \
+    wget
 
 # Firefox (DEB)
 sudo apt remove --purge firefox
@@ -93,3 +94,8 @@ Package: ungoogled-chromium*
 Pin: release o=LP-PPA-xtradeb-apps
 Pin-Priority: 500
 EOF
+
+# Claude Desktop
+sudo curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc
+echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/claude-desktop-archive-keyring.asc] https://downloads.claude.ai/claude-desktop/apt/stable stable main" | sudo tee /etc/apt/sources.list.d/claude-desktop.list
+sudo apt-get update && sudo apt-get install -y claude-desktop
