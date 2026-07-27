@@ -15,9 +15,9 @@ sudo -v
 
 ./packages.sh
 ./terminal_tools.sh
-./apps.sh
+./gui_apps.sh
 ./settings.sh
-./dev_tools.sh
+./misc.sh
 ./drivers.sh
 ./dotfiles.sh
 

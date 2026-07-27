@@ -7,10 +7,16 @@ sudo apt-get update && sudo apt-get install -y \
     gpg \
     wget
 
-# Foxglove Studio
-wget -O foxglove.deb https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
-sudo dpkg -i foxglove.deb
-rm foxglove.deb
+# Nerd Fonts
+wget -O UbuntuMono.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
+unzip -oq UbuntuMono.zip -d UbuntuMono
+mkdir -p /usr/share/fonts/truetype
+sudo cp -r UbuntuMono /usr/share/fonts/truetype
+wget -O DroidSansMono.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DroidSansMono.zip
+unzip -oq DroidSansMono.zip -d DroidSansMono
+mkdir -p /usr/share/fonts/opentype
+sudo cp -r DroidSansMono /usr/share/fonts/opentype
+fc-cache -f
 
 # Docker
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -46,22 +52,6 @@ sudo apt-get install -y nvidia-container-toolkit
 
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
-
-# Lazygit
-mkdir -p ~/.local/bin
-lazygit_version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${lazygit_version}/lazygit_${lazygit_version}_Linux_x86_64.tar.gz"
-tar -xzf lazygit.tar.gz -C ~/.local/bin lazygit
-rm lazygit.tar.gz
-
-# Lazydocker
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
-# Mutagen
-mutagen_url=$(curl -fsSL https://api.github.com/repos/mutagen-io/mutagen/releases/latest | jq -r '.assets[].browser_download_url' | grep linux_amd64)
-wget -O mutagen.tar.gz "$mutagen_url"
-sudo tar -xzf mutagen.tar.gz -C /usr/local/bin
-rm mutagen.tar.gz
 
 read -rp "The system needs to restart in order to apply changes and allow docker to run without sudo. Restart now? [y/N] "
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then

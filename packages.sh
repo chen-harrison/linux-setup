@@ -20,7 +20,6 @@ packages=(
     libsecret-1-dev                 # git-credential-libsecret dependency
     libsecret-tools                 # CLI interface for gnome-keyring
     nvtop                           # System monitor for GPU
-    ripgrep                         # Improve grep alternative
     shellcheck                      # Shell script analysis
     synaptic                        # Package manager
     texlive                         # LaTeX
