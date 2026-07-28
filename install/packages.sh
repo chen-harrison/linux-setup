@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-# git PPA
-sudo add-apt-repository -y ppa:git-core/ppa
-
 # Packages
 packages=(
-    python3-pip                     # Python package manager
     dconf-editor                    # Application for modifying settings
     ffmpeg                          # Audio + video encoder
-    git                             # Version control
     gdb                             # Debugging
+    gpg                             # Encryption and data signing
     gthumb                          # Image viewer
     htop                            # System monitor for CPU, memory, swap
     imagemagick                     # Image conversion (?)
@@ -20,6 +16,7 @@ packages=(
     libsecret-1-dev                 # git-credential-libsecret dependency
     libsecret-tools                 # CLI interface for gnome-keyring
     nvtop                           # System monitor for GPU
+    python3-pip                     # Python package manager
     shellcheck                      # Shell script analysis
     synaptic                        # Package manager
     texlive                         # LaTeX
@@ -32,37 +29,46 @@ packages=(
 
 sudo apt-get update && sudo apt-get install -y "${packages[@]}"
 
+# git
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt-get update && sudo apt-get install -y git
+
 # git-lfs
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get install git-lfs
-
-# clangd
-clangd_url=$(curl -fsSL https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep clangd-linux)
-clangd_version=$(curl -fsSL "https://api.github.com/repos/clangd/clangd/releases/latest" | jq -r '.tag_name')
-wget -O clangd.zip "$clangd_url"
-unzip -q clangd.zip
-sudo cp "clangd_$clangd_version/bin/clangd" /usr/local/bin
-sudo cp -r "clangd_$clangd_version/lib/clang" /usr/local/lib
-sudo ln -sf /usr/local/bin/clangd /usr/bin/clangd
-rm -r clangd.zip "clangd_${clangd_version}"
-
-# yt-dlp
-mkdir -p ~/.local/bin
-wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
-chmod +x ~/.local/bin/yt-dlp
-
-# latexindent
-wget https://github.com/cmhughes/latexindent.pl/releases/latest/download/latexindent-linux
-chmod +x latexindent-linux
-sudo mv latexindent-linux /usr/local/bin/latexindent
+sudo apt-get update && sudo apt-get install -y git-lfs
 
 # git-credential-libsecret
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
 
-# SSH key
-read -rp "Email address for SSH key: " EMAIL
-if [[ $EMAIL ]] ; then
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$EMAIL"
-else
-    echo "No input received, skipping ssh-keygen"
-fi
+# Docker
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update && sudo apt-get install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+
+(sudo groupadd docker ; sudo usermod -aG docker "$USER") || true
+
+# Nvidia Container Toolkit
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+    && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker

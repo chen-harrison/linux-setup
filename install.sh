@@ -18,7 +18,6 @@ sudo -v
 ./install/gui_apps.sh
 ./install/settings.sh
 ./install/misc.sh
-./install/drivers.sh
 ./install/dotfiles.sh
 
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then

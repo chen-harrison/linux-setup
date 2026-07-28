@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 set -e
+tmp_dir=$(mktemp -d)
+trap 'rm -rf "$tmp_dir"' EXIT
+
+# Move to tmp_dir to simplify file pathing in below commands
+cd "$tmp_dir"
 
 # Make sure this directory exists
 mkdir -p ~/.local/bin
 
+# Create multiple representations of device arch, since packages use diff conventions
 dpkg_arch=$(dpkg --print-architecture)  # amd64 or arm64
 uname_arch=$(uname -m)                  # x86_64 or aarch64
-# Need a custom one to handle some naming conventions
 mixed_arch=$uname_arch                  # x86_64 or arm64
 [[ "$mixed_arch" == "aarch64" ]] && mixed_arch=$dpkg_arch
-
-# Use subshell running in /tmp so that all downloaded files are placed there
-(
-cd /tmp
 
 # fd
 fd_deb_url=$(curl -fsSL https://api.github.com/repos/sharkdp/fd/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "fd_.*${dpkg_arch}\.deb")
@@ -77,7 +78,26 @@ tar -xzf lazygit.tar.gz -C ~/.local/bin lazygit
 mutagen_targz_url=$(curl -fsSL https://api.github.com/repos/mutagen-io/mutagen/releases/latest | jq -r '.assets[].browser_download_url' | grep -E "mutagen_linux_${dpkg_arch}_.*\.tar\.gz")
 wget -O mutagen.tar.gz "$mutagen_targz_url"
 sudo tar -xzf mutagen.tar.gz -C /usr/local/bin
-)
+
+# clangd
+clangd_url=$(curl -fsSL https://api.github.com/repos/clangd/clangd/releases/latest | jq -r '.assets[].browser_download_url' | grep clangd-linux)
+clangd_version=$(curl -fsSL "https://api.github.com/repos/clangd/clangd/releases/latest" | jq -r '.tag_name')
+wget -O clangd.zip "$clangd_url"
+unzip -q clangd.zip
+sudo cp "clangd_${clangd_version}/bin/clangd" /usr/local/bin
+sudo cp -r "clangd_${clangd_version}/lib/clang" /usr/local/lib
+sudo ln -sf /usr/local/bin/clangd /usr/bin/clangd
+
+# latexindent
+latexindent_bin=latexindent-linux
+[[ "$dpkg_arch" == "arm64" ]] && latexindent_bin=latexindent-linux-arm64
+wget -O latexindent-linux "https://github.com/cmhughes/latexindent.pl/releases/latest/download/${latexindent_bin}"
+chmod +x latexindent-linux
+sudo cp latexindent-linux /usr/local/bin/latexindent
+
+# yt-dlp
+wget -O ~/.local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+chmod +x ~/.local/bin/yt-dlp
 
 # Lazydocker
 curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash

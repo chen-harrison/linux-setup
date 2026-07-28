@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -e
+tmp_dir=$(mktemp -d)
+trap 'rm -rf "$tmp_dir"' EXIT
 
 # Run from repo root
 cd "$(dirname "$0")/.."
@@ -35,10 +37,9 @@ sudo apt-get update && sudo apt-get install -y spotify-client
 sudo apt-get install -y vlc
 
 # VS Code + Extensions
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > "${tmp_dir}/packages.microsoft.gpg"
+sudo install -D -o root -g root -m 644 "${tmp_dir}/packages.microsoft.gpg" /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
 sudo apt-get install -y apt-transport-https
 sudo apt-get update
 sudo apt-get install -y code
@@ -61,29 +62,25 @@ done
 #     codium --install-extension "$extension" --force
 # done
 
-# wget -O /tmp/vscodium.svg "https://raw.githubusercontent.com/VSCodium/vscodium/master/icons/stable/codium_cnl.svg"
+# wget -O "${tmp_dir}/vscodium.svg" "https://raw.githubusercontent.com/VSCodium/vscodium/master/icons/stable/codium_cnl.svg"
 # sudo apt install librsvg2-bin
-# rsvg-convert -w 512 -h 512 /tmp/vscodium.svg -o /tmp/vscodium.png
+# rsvg-convert -w 512 -h 512 "${tmp_dir}/vscodium.svg" -o "${tmp_dir}/vscodium.png"
 # sudo cp /usr/share/pixmaps/vscodium.png /usr/share/pixmaps/vscodium.png.bak
-# sudo cp /tmp/vscodium.png /usr/share/pixmaps/vscodium.png
-# rm /tmp/vscodium.svg /tmp/vscodium.png
+# sudo cp "${tmp_dir}/vscodium.png" /usr/share/pixmaps/vscodium.png
 
 # Obsidian
 obsidian_url=$(curl -fsSL https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
-wget -O obsidian.deb "$obsidian_url"
-sudo dpkg -i obsidian.deb
-rm obsidian.deb
+wget -O "${tmp_dir}/obsidian.deb" "$obsidian_url"
+sudo dpkg -i "${tmp_dir}/obsidian.deb"
 
 # Dropbox
 dropbox_deb=$(curl -fsSL https://linux.dropbox.com/packages/ubuntu | grep -oP 'dropbox_[\d.]+_amd64\.deb' | sort -V | tail -1)
-wget -O dropbox.deb "https://linux.dropbox.com/packages/ubuntu/$dropbox_deb"
-sudo dpkg -i dropbox.deb
-rm dropbox.deb
+wget -O "${tmp_dir}/dropbox.deb" "https://linux.dropbox.com/packages/ubuntu/$dropbox_deb"
+sudo dpkg -i "${tmp_dir}/dropbox.deb"
 
 # Ungoogled Chromium
-wget https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.6_all.deb
-sudo apt install ./xtradeb-apt-source_0.6_all.deb
-rm ./xtradeb-apt-source_0.6_all.deb
+wget -O "${tmp_dir}/xtradeb-apt-source.deb" https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.6_all.deb
+sudo apt install "${tmp_dir}/xtradeb-apt-source.deb"
 sudo apt-get update && sudo apt-get install ungoogled-chromium
 
 sudo tee /etc/apt/preferences.d/xtradeb <<EOF
@@ -102,6 +99,5 @@ echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/claude-desktop-archive
 sudo apt-get update && sudo apt-get install -y claude-desktop
 
 # Foxglove Studio
-wget -O foxglove.deb https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
-sudo dpkg -i foxglove.deb
-rm foxglove.deb
+wget -O "${tmp_dir}/foxglove.deb" https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
+sudo dpkg -i "${tmp_dir}/foxglove.deb"
