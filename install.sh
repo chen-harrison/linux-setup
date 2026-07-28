@@ -13,16 +13,16 @@ read -rp "Is this installation for personal (not professional) use? [y/N] "
 # Authenticate with sudo at the beginning, which is applied elsewhere
 sudo -v
 
-./packages.sh
-./terminal_tools.sh
-./gui_apps.sh
-./settings.sh
-./misc.sh
-./drivers.sh
-./dotfiles.sh
+./install/packages.sh
+./install/terminal_tools.sh
+./install/gui_apps.sh
+./install/settings.sh
+./install/misc.sh
+./install/drivers.sh
+./install/dotfiles.sh
 
 if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
-    ./fun.sh
+    ./install/fun.sh
 fi
 
 echo \ "

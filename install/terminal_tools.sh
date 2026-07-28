@@ -54,7 +54,7 @@ fi
 # fasd
 wget -O fasd.zip https://github.com/clvv/fasd/archive/refs/tags/1.0.1.zip
 unzip -o fasd.zip
-cd fasd-1.0.1 && sudo make install && cd /tmp
+sudo make -C fasd-1.0.1 install
 
 # nnn
 nnn_targz_url=$(curl -fsSL https://api.github.com/repos/jarun/nnn/releases/latest | jq -r '.assets[].browser_download_url' | grep nerd-static)

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# Run from repo root
+cd "$(dirname "$0")/.."
+
 # Set favorite apps
 gsettings set org.gnome.shell favorite-apps \
 "['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop']"
@@ -42,12 +45,10 @@ gnome-extensions disable ding@rastersoft.com
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
 # Restore terminal profile
-cd "$(dirname "$0")"
 profile_id="$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d "'")"
-sed -i "1s/^/[:${profile_id}]\n/" terminal_profile.dconf
-dconf load /org/gnome/terminal/legacy/profiles:/ < terminal_profile.dconf
-tail -n +2 terminal_profile.dconf > temp.dconf  && mv temp.dconf terminal_profile.dconf
-cd - > /dev/null
+sed -i "1s/^/[:${profile_id}]\n/" config/terminal_profile.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < config/terminal_profile.dconf
+tail -n +2 config/terminal_profile.dconf > temp.dconf  && mv temp.dconf config/terminal_profile.dconf
 
 # Turn off app notifications
 gsettings set org.gnome.desktop.notifications.application:/org/gnome/desktop/notifications/application/spotify/ enable false
