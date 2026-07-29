@@ -23,9 +23,4 @@ fc-cache -f
 sudo ubuntu-drivers install
 
 # SSH key
-read -rp "Email address for SSH key: " EMAIL
-if [[ $EMAIL ]] ; then
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$EMAIL"
-else
-    echo "No input received, skipping ssh-keygen"
-fi
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""

@@ -13,8 +13,8 @@ read -rp "Is this installation for personal (not professional) use? [y/N] "
 # Authenticate with sudo at the beginning, which is applied elsewhere
 sudo -v
 
-./install/packages.sh
-./install/terminal_tools.sh
+./install/apt_packages.sh
+./install/github_binaries.sh
 ./install/gui_apps.sh
 ./install/settings.sh
 ./install/misc.sh
