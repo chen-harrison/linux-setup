@@ -15,8 +15,15 @@ sudo apt-get update && sudo apt-get install -y \
     libzstd-dev \
     libfaad-dev
 
-# Ubuntu 24.04 requirements
-sudo apt-get install -y qt6-{base,base-private,multimedia,svg}-dev
+if [[ "$(lsb_release -rs)" == "22.04" ]] ; then
+    sudo apt-get update -q && sudo apt-get install -y \
+        qtbase6-dev \
+        qtbase6-private-dev \
+        qtmultimedia6-dev \
+        libqt6svg6-dev
+else  # 24.04+
+    sudo apt-get update -q && sudo apt-get install -y qt6-{base,base-private,multimedia,svg}-dev
+fi
 
 melonds_dir=~/.local/share/melonDS
 melonds_url=$(curl -fsSL https://api.github.com/repos/melonDS-emu/melonDS/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "melonDS-.*ubuntu-x86_64.zip")

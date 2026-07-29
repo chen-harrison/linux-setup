@@ -54,15 +54,13 @@ tail -n +2 config/terminal_profile.dconf > temp.dconf  && mv temp.dconf config/t
 gsettings set org.gnome.desktop.notifications.application:/org/gnome/desktop/notifications/application/spotify/ enable false
 
 # Ubuntu 22.04 video playback fix: https://www.makeuseof.com/things-to-do-after-upgrading-to-ubuntu-2204-lts/
-read -rp "Is this Ubuntu 22.04? [y/N]"
-if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
-    echo "Fixing video playback"
+if [[ "$(lsb_release -rs)" == "22.04" ]] ; then
     sudo apt remove -y gstreamer1.0-vaapi
 fi
 
-# Dual boot clock correction
-read -rp "Is this a dual-boot configuration? [y/N]"
-if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
-    echo "Fixing clock"
-    timedatectl set-local-rtc 1 --adjust-system-clock
-fi
+# # Dual boot clock correction
+# read -rp "Is this a dual-boot configuration? [y/N]"
+# if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
+#     echo "Fixing clock"
+#     timedatectl set-local-rtc 1 --adjust-system-clock
+# fi

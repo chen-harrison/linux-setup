@@ -3,6 +3,7 @@ set -e
 
 # Packages
 packages=(
+    curl                            # Data transfer tool
     dconf-editor                    # Application for modifying settings
     ffmpeg                          # Audio + video encoder
     gdb                             # Debugging
@@ -18,6 +19,7 @@ packages=(
     nvtop                           # System monitor for GPU
     python3-pip                     # Python package manager
     shellcheck                      # Shell script analysis
+    software-properties-common      # Provides add-apt-repository
     synaptic                        # Package manager
     texlive                         # LaTeX
     texlive-formats-extra           # LaTeX
@@ -27,7 +29,10 @@ packages=(
     xsel                            # Clipboard manipulation
 )
 
-sudo apt-get update && sudo apt-get install -y "${packages[@]}"
+sudo apt-get update && sudo \
+    DEBIAN_FRONTEND=noninteractive \
+    TZ="$(cat /etc/timezone 2>/dev/null || echo "UTC")" \
+    apt-get install -y "${packages[@]}"
 
 # git
 sudo add-apt-repository -y ppa:git-core/ppa
