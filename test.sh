@@ -8,7 +8,7 @@ repo_dir="$(cd "$(dirname "$0")" && pwd)"
 docker build -t "$image_name" -f - "$repo_dir" <<'EOF'
 FROM ubuntu:latest
 
-RUN apt-get update && \
+RUN apt-get update -q && \
     apt-get install -y sudo unminimize && \
     rm -rf /var/lib/apt/lists/* && \
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu && \

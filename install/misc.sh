@@ -4,8 +4,8 @@ tmp_dir=$(mktemp -d)
 trap 'rm -rf "$tmp_dir"' EXIT
 
 # Installation requirements
-sudo apt-get update && sudo apt-get install -y \
-    curl \
+sudo apt-get update -qq && sudo apt-get install -y \
+    unzip \
     wget
 
 # Nerd Fonts

@@ -29,18 +29,18 @@ packages=(
     xsel                            # Clipboard manipulation
 )
 
-sudo apt-get update && sudo \
+sudo apt-get update -q && sudo \
     DEBIAN_FRONTEND=noninteractive \
     TZ="$(cat /etc/timezone 2>/dev/null || echo "UTC")" \
     apt-get install -y "${packages[@]}"
 
 # git
 sudo add-apt-repository -y ppa:git-core/ppa
-sudo apt-get update && sudo apt-get install -y git
+sudo apt-get update -q && sudo apt-get install -y git
 
 # git-lfs
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get update && sudo apt-get install -y git-lfs
+sudo apt-get update -q && sudo apt-get install -y git-lfs
 
 # git-credential-libsecret
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
@@ -58,7 +58,7 @@ echo \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update && sudo apt-get install -y \
+sudo apt-get update -q && sudo apt-get install -y \
     docker-ce \
     docker-ce-cli \
     containerd.io \
@@ -73,7 +73,7 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
         sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
         sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
-sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo apt-get update -q && sudo apt-get install -y nvidia-container-toolkit
 
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker

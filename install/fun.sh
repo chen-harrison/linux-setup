@@ -4,7 +4,7 @@ tmp_dir=$(mktemp -d)
 trap 'rm -rf "$tmp_dir"' EXIT
 
 # melonDS
-sudo apt-get update && sudo apt-get install -y \
+sudo apt-get update -q && sudo apt-get install -y \
     cmake \
     extra-cmake-modules \
     libcurl4-gnutls-dev \
