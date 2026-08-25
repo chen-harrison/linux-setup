@@ -1,3 +1,3 @@
 # Linux Setup
 
-Currently testing on Ubuntu 24.04
+Currently testing on Ubuntu 26.04
