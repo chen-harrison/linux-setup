@@ -6,7 +6,13 @@ cd "$(dirname "$0")/.."
 
 # Set favorite apps
 gsettings set org.gnome.shell favorite-apps \
-"['org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop']"
+"['org.gnome.Ptyxis.desktop', \
+  'org.gnome.Nautilus.desktop', \
+  'firefox.desktop', \
+  'code.desktop', \
+  'spotify.desktop', \
+  'md.obsidian.Obsidian.desktop', \
+  'com.anthropic.Claude.desktop']"
 
 # Screen brightness
 gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
@@ -15,7 +21,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 24
 
 # Color scheme
 gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
-gsettings set org.gnome.desktop.interface icon-theme 'Yaru-blue'
+gsettings set org.gnome.desktop.interface icon-theme 'Yaru-blue-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # Dash to dock
@@ -43,20 +49,6 @@ gnome-extensions disable ding@rastersoft.com
 
 # Disable system bell sound
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
-
-# Restore terminal profile
-profile_id="$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d "'")"
-sed -i "1s/^/[:${profile_id}]\n/" config/terminal_profile.dconf
-dconf load /org/gnome/terminal/legacy/profiles:/ < config/terminal_profile.dconf
-tail -n +2 config/terminal_profile.dconf > temp.dconf  && mv temp.dconf config/terminal_profile.dconf
-
-# Turn off app notifications
-gsettings set org.gnome.desktop.notifications.application:/org/gnome/desktop/notifications/application/spotify/ enable false
-
-# Ubuntu 22.04 video playback fix: https://www.makeuseof.com/things-to-do-after-upgrading-to-ubuntu-2204-lts/
-if [[ "$(lsb_release -rs)" == "22.04" ]] ; then
-    sudo apt remove -y gstreamer1.0-vaapi
-fi
 
 # # Dual boot clock correction
 # read -rp "Is this a dual-boot configuration? [y/N]"

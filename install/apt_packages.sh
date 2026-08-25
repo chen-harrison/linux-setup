@@ -7,6 +7,7 @@ packages=(
     dconf-editor                    # Application for modifying settings
     ffmpeg                          # Audio + video encoder
     gdb                             # Debugging
+    git-lfs                         # Git Large File Storage
     gpg                             # Encryption and data signing
     gthumb                          # Image viewer
     htop                            # System monitor for CPU, memory, swap
@@ -37,10 +38,6 @@ sudo apt-get update -q && sudo \
 # git
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update -q && sudo apt-get install -y git
-
-# git-lfs
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get update -q && sudo apt-get install -y git-lfs
 
 # git-credential-libsecret
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
