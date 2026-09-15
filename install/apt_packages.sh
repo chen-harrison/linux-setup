@@ -12,7 +12,7 @@ packages=(
     gthumb                          # Image viewer
     htop                            # System monitor for CPU, memory, swap
     imagemagick                     # Image conversion (?)
-    ibus-pinyin                     # Chinese keyboard
+    ibus-libpinyin                  # Chinese keyboard
     jq                              # JSON parser
     latexmk                         # LaTeX
     libsecret-1-dev                 # git-credential-libsecret dependency
