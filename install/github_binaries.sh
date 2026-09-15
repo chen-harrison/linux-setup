@@ -74,22 +74,6 @@ if bat_deb_url=$(get_asset_url "sharkdp/bat" "bat_.*${dpkg_arch}\.deb") ; then
     sudo dpkg -i bat.deb
 fi
 
-# ncdu
-ncdu_targz=$(curl -fsSL https://dev.yorhel.nl/download | grep -oP "ncdu-[\d.]+-linux-${uname_arch}\.tar\.gz" | sort -V | tail -1)
-wget -qO ncdu.tar.gz "https://dev.yorhel.nl/download/${ncdu_targz}"
-sudo tar -xzf ncdu.tar.gz -C /usr/local/bin ncdu
-
-# fzf
-if ! $update ; then
-    rm -rf ~/.fzf
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --key-bindings --completion --no-update-rc
-    wget -qO ~/.fzf/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh
-elif [ -d ~/.fzf ] ; then
-    git -C ~/.fzf pull
-    ~/.fzf/install --key-bindings --completion --no-update-rc
-fi
-
 # delta
 if delta_deb_url=$(get_asset_url "dandavison/delta" "git-delta_.*_${dpkg_arch}\.deb") ; then
     wget -qO delta.deb "$delta_deb_url"
@@ -107,13 +91,6 @@ elif [[ "$uname_arch" == "aarch64" ]]; then
         wget -qO ripgrep.tar.gz "$ripgrep_targz_url"
         tar -xzf ripgrep.tar.gz -C /usr/bin --strip-components=1 --wildcards '*/rg'
     fi
-fi
-
-# fasd
-if ! $update ; then
-    wget -qO fasd.zip https://github.com/clvv/fasd/archive/refs/tags/1.0.1.zip
-    unzip -o fasd.zip
-    sudo make -C fasd-1.0.1 install
 fi
 
 # nnn
@@ -167,6 +144,31 @@ fi
 if yt_dlp_url=$(get_asset_url "yt-dlp/yt-dlp" "yt-dlp$") ; then
     wget -qO ~/.local/bin/yt-dlp "$yt_dlp_url"
     chmod +x ~/.local/bin/yt-dlp
+fi
+
+#################### UNCONVENTIONAL INSTALLATIONS ####################
+
+# ncdu
+ncdu_targz=$(curl -fsSL https://dev.yorhel.nl/download | grep -oP "ncdu-[\d.]+-linux-${uname_arch}\.tar\.gz" | sort -V | tail -1)
+wget -qO ncdu.tar.gz "https://dev.yorhel.nl/download/${ncdu_targz}"
+sudo tar -xzf ncdu.tar.gz -C /usr/local/bin ncdu
+
+# fzf
+if ! $update ; then
+    rm -rf ~/.fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --key-bindings --completion --no-update-rc
+    wget -qO ~/.fzf/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh
+elif [ -d ~/.fzf ] ; then
+    git -C ~/.fzf pull
+    ~/.fzf/install --key-bindings --completion --no-update-rc
+fi
+
+# fasd
+if ! $update ; then
+    wget -qO fasd.zip https://github.com/clvv/fasd/archive/refs/tags/1.0.1.zip
+    unzip -o fasd.zip
+    sudo make -C fasd-1.0.1 install
 fi
 
 # Lazydocker

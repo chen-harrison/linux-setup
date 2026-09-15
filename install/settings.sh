@@ -50,9 +50,9 @@ gnome-extensions disable ding@rastersoft.com
 # Disable system bell sound
 gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
-# # Dual boot clock correction
-# read -rp "Is this a dual-boot configuration? [y/N]"
-# if [[ "$REPLY" =~ ^[yY]([eE][sS])?$ ]] ; then
-#     echo "Fixing clock"
-#     timedatectl set-local-rtc 1 --adjust-system-clock
-# fi
+# Shortcuts
+gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Super>comma']"
+
+# Chinese keyboard
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
+gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
