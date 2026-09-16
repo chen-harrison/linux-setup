@@ -56,3 +56,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Su
 # Chinese keyboard
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
 gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
+
+# Tiling assistant
+gsettings set org.gnome.shell.extensions.tiling-assistant disable-tile-groups true
+gsettings set org.gnome.shell.extensions.tiling-assistant enable-tiling-popup false

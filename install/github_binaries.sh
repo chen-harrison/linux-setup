@@ -5,14 +5,16 @@ set -e
 update=false
 [[ "$1" == "--update" ]] && update=true
 
-# Install required pacakges
-sudo apt-get update -qq && sudo apt-get install -y \
-    curl \
-    jq \
-    unzip \
-    wget
+# Install missing dependencies
+missing_deps=()
+for pkg in curl jq unzip wget ; do
+    command -v "$pkg" &> /dev/null || missing_deps+=("$pkg")
+done
 
-# Install yq if it doesn't exist
+if (( ${#missing_deps[@]} )) ; then
+    sudo apt-get update -qq && sudo apt-get install -y "${missing_deps[@]}"
+fi
+
 if ! command -v yq &> /dev/null ; then
     yq_url=$(curl -fsSL https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets[].browser_download_url' | grep -e "yq_linux_amd64$")
     wget -qO yq "$yq_url"
@@ -35,7 +37,7 @@ get_asset_url() {
 
     if $update ; then
         local stored_tag
-        stored_tag=$(yq -r ".\"$repo\" // \"\"" "$versions_file")
+        stored_tag=$(yq -r ".\"$repo\" // \"null\"" "$versions_file")
 
         [ "$latest_tag" = "$stored_tag" ] && return 1
         echo -e "\e[0;32m$repo\e[0m  $stored_tag -> $latest_tag" >&2
@@ -146,6 +148,12 @@ if yt_dlp_url=$(get_asset_url "yt-dlp/yt-dlp" "yt-dlp$") ; then
     chmod +x ~/.local/bin/yt-dlp
 fi
 
+# LocalSend
+if localsend_deb_url=$(get_asset_url "localsend/localsend" "LocalSend-.*-linux-x86-64.deb") ; then
+    wget -qO localsend.deb "$localsend_deb_url"
+    sudo dpkg -i localsend.deb
+fi
+
 #################### UNCONVENTIONAL INSTALLATIONS ####################
 
 # ncdu
@@ -160,7 +168,7 @@ if ! $update ; then
     ~/.fzf/install --key-bindings --completion --no-update-rc
     wget -qO ~/.fzf/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh
 elif [ -d ~/.fzf ] ; then
-    git -C ~/.fzf pull
+    git -C ~/.fzf pull > /dev/null
     ~/.fzf/install --key-bindings --completion --no-update-rc
 fi
 
