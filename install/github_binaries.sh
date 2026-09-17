@@ -67,26 +67,26 @@ cd "$tmp_dir"
 # fd
 if fd_deb_url=$(get_asset_url "sharkdp/fd" "fd_.*${dpkg_arch}\.deb") ; then
     wget -qO fd.deb "$fd_deb_url"
-    sudo dpkg -i fd.deb
+    sudo apt-get install -y ./fd.deb
 fi
 
 # bat
 if bat_deb_url=$(get_asset_url "sharkdp/bat" "bat_.*${dpkg_arch}\.deb") ; then
     wget -qO bat.deb "$bat_deb_url"
-    sudo dpkg -i bat.deb
+    sudo apt-get install -y ./bat.deb
 fi
 
 # delta
 if delta_deb_url=$(get_asset_url "dandavison/delta" "git-delta_.*_${dpkg_arch}\.deb") ; then
     wget -qO delta.deb "$delta_deb_url"
-    sudo dpkg -i delta.deb
+    sudo apt-get install -y ./delta.deb
 fi
 
 # ripgrep (no .deb file available for arm64, so we extract from a .tar.gz file)
 if [[ "$dpkg_arch" == "amd64" ]] ; then
     if ripgrep_deb_url=$(get_asset_url "BurntSushi/ripgrep" "ripgrep_.*_amd64\.deb") ; then
         wget -qO ripgrep.deb "$ripgrep_deb_url"
-        sudo dpkg -i ripgrep.deb
+        sudo apt-get install -y ./ripgrep.deb
     fi
 elif [[ "$uname_arch" == "aarch64" ]]; then
     if ripgrep_targz_url=$(get_asset_url "BurntSushi/ripgrep" "ripgrep-.*-aarch64-unknown-linux-gnu\.tar\.gz$") ; then
@@ -151,7 +151,7 @@ fi
 # LocalSend
 if localsend_deb_url=$(get_asset_url "localsend/localsend" "LocalSend-.*-linux-x86-64.deb") ; then
     wget -qO localsend.deb "$localsend_deb_url"
-    sudo dpkg -i localsend.deb
+    sudo apt-get install -y ./localsend.deb
 fi
 
 #################### UNCONVENTIONAL INSTALLATIONS ####################

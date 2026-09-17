@@ -13,11 +13,11 @@ sudo apt-get update -qq && sudo apt-get install -y \
     wget
 
 # Firefox (DEB)
-sudo apt remove --purge firefox
+sudo apt-get remove --purge -y firefox
 sudo snap remove --purge firefox
 sudo install -d -m 0755 /etc/apt/keyrings
 wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee /etc/apt/sources.list.d/mozilla.list > /dev/null
 echo -e "Package: firefox\nPin: release o=Ubuntu\nPin-Priority: -1" | sudo tee /etc/apt/preferences.d/mozilla
 sudo apt-get update -q && sudo apt-get install -y firefox
 
@@ -70,17 +70,17 @@ done
 # Obsidian
 obsidian_url=$(curl -fsSL https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | jq -r '.assets[].browser_download_url' | grep 'amd64.deb')
 wget -O "${tmp_dir}/obsidian.deb" "$obsidian_url"
-sudo dpkg -i "${tmp_dir}/obsidian.deb"
+sudo apt-get install -y "${tmp_dir}/obsidian.deb"
 
 # Dropbox
 dropbox_deb=$(curl -fsSL https://linux.dropbox.com/packages/ubuntu | grep -oP 'dropbox_[\d.]+_amd64\.deb' | sort -V | tail -1)
 wget -O "${tmp_dir}/dropbox.deb" "https://linux.dropbox.com/packages/ubuntu/$dropbox_deb"
-sudo dpkg -i "${tmp_dir}/dropbox.deb"
+sudo apt-get install -y "${tmp_dir}/dropbox.deb"
 
 # Ungoogled Chromium
 wget -O "${tmp_dir}/xtradeb-apt-source.deb" https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.6_all.deb
-sudo apt install "${tmp_dir}/xtradeb-apt-source.deb"
-sudo apt-get update -q && sudo apt-get install ungoogled-chromium
+sudo apt-get install -y "${tmp_dir}/xtradeb-apt-source.deb"
+sudo apt-get update -q && sudo apt-get install -y ungoogled-chromium
 
 sudo tee /etc/apt/preferences.d/xtradeb <<EOF
 Package: *
@@ -99,4 +99,4 @@ sudo apt-get update -q && sudo apt-get install -y claude-desktop
 
 # Foxglove Studio
 wget -O "${tmp_dir}/foxglove.deb" https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
-sudo dpkg -i "${tmp_dir}/foxglove.deb"
+sudo apt-get install -y "${tmp_dir}/foxglove.deb"
