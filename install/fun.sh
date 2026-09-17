@@ -47,8 +47,8 @@ ln -sf "${melonds_dir}/melonDS.desktop" ~/.local/share/applications/melonDS.desk
 
 # Discord
 wget -O "${tmp_dir}/discord.deb" "https://discordapp.com/api/download?platform=linux&format=deb"
-sudo dpkg -i "${tmp_dir}/discord.deb"
+sudo apt-get install -y "${tmp_dir}/discord.deb"
 
 # Steam
 wget -O "${tmp_dir}/steam.deb" "https://repo.steampowered.com/steam/archive/stable/steam_latest.deb"
-sudo dpkg -i "${tmp_dir}/steam.deb"
+sudo apt-get install -y "${tmp_dir}/steam.deb"
