@@ -37,6 +37,7 @@ cat > "${melonds_dir}/melonDS.desktop" << EOF
 Name=melonDS
 Exec=/home/$USER/.local/share/melonDS/melonDS
 StartupNotify=true
+StartupWMClass=net.kuribo64.melonDS
 Terminal=false
 Type=Application
 Categories=Game;

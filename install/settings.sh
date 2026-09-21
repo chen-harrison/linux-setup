@@ -24,6 +24,12 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Yaru-blue-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+# Ptyxis (terminal)
+ptyxis_profile_uuid=$(gsettings get org.gnome.Ptyxis default-profile-uuid | tr -d "'")
+gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_profile_uuid}/" label 'Default'
+gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_profile_uuid}/" palette 'gnome'
+gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_profile_uuid}/" limit-scrollback false
+
 # Dash to dock
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
