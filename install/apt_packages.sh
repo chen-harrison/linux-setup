@@ -27,6 +27,7 @@ packages=(
     trash-cli                       # Trash from CLI
     tree                            # File structure visualization
     ubuntu-restricted-extras        # Media codecs, fonts, etc.
+    wl-clipboard                    # Clipboard manipulation
     xsel                            # Clipboard manipulation
 )
 
