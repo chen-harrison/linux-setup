@@ -19,6 +19,7 @@ packages=(
     libsecret-tools                 # CLI interface for gnome-keyring
     nvtop                           # System monitor for GPU
     python3-pip                     # Python package manager
+    python-is-python3               # Symlink python -> python3
     shellcheck                      # Shell script analysis
     software-properties-common      # Provides add-apt-repository
     synaptic                        # Package manager
