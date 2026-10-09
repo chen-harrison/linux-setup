@@ -19,6 +19,9 @@ mkdir -p /usr/share/fonts/opentype
 sudo cp -r "${tmp_dir}/DroidSansMono" /usr/share/fonts/opentype
 fc-cache -f
 
+# Claude CLI
+curl -fsSL https://claude.ai/install.sh | bash
+
 # Nvidia drivers
 sudo ubuntu-drivers install
 

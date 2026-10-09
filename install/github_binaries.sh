@@ -152,6 +152,12 @@ fi
 if localsend_deb_url=$(get_asset_url "localsend/localsend" "LocalSend-.*-linux-x86-64.deb") ; then
     wget -qO localsend.deb "$localsend_deb_url"
     sudo apt-get install -y ./localsend.deb
+
+    if ! $update ; then
+        mkdir -p ~/.local/share/applications
+        sed '$a StartupWMClass=org.localsend.localsend_app' /usr/share/applications/localsend_app.desktop \
+            > ~/.local/share/applications/localsend_app.desktop
+    fi
 fi
 
 #################### UNCONVENTIONAL INSTALLATIONS ####################

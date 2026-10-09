@@ -60,8 +60,7 @@ gsettings set org.gnome.desktop.wm.preferences audible-bell false
 gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Super>comma']"
 
 # Chinese keyboard
-gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
-gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us'), ('ibus', 'pinyin')]"
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'libpinyin')]"
 
 # Tiling assistant
 gsettings set org.gnome.shell.extensions.tiling-assistant disable-tile-groups true
