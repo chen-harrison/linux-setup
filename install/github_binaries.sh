@@ -171,11 +171,11 @@ sudo tar -xzf ncdu.tar.gz -C /usr/local/bin ncdu
 if ! $update ; then
     rm -rf ~/.fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --key-bindings --completion --no-update-rc
+    ~/.fzf/install --bin
     wget -qO ~/.fzf/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/refs/heads/main/fzf-git.sh
 elif [ -d ~/.fzf ] ; then
     git -C ~/.fzf pull > /dev/null
-    ~/.fzf/install --key-bindings --completion --no-update-rc
+    ~/.fzf/install --bin
 fi
 
 # fasd
