@@ -30,6 +30,11 @@ gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_prof
 gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_profile_uuid}/" palette 'gnome'
 gsettings set "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${ptyxis_profile_uuid}/" limit-scrollback false
 
+# Text editor
+gsettings set org.gnome.TextEditor tab-width 4
+gsettings set org.gnome.TextEditor indent-width 4
+gsettings set org.gnome.TextEditor indent-style 'space'
+
 # Dash to dock
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
