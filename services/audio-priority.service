@@ -1,0 +1,12 @@
+[Unit]
+Description=Set default audio devices from a priority list
+After=wireplumber.service
+BindsTo=wireplumber.service
+
+[Service]
+ExecStart=%h/.local/bin/audio-priority
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=wireplumber.service

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Pick the default PipeWire sink/source from a priority list whenever audio devices are added or
+# removed. Other graph events (streams starting, links, volume changes) are ignored, so a manual
+# selection sticks until the next device is plugged in or removed.
+# Find node names for the patterns with `wpctl inspect <id>` (ids from `wpctl status`).
+
+# Glob patterns matched against node.name, highest priority first
+SINK_PRIORITY=(
+    'alsa_output.usb-CalDigit_Inc._CalDigit_TS4_Audio_-_Front-00.analog-stereo'
+    '*HiFi__Headphones__sink'
+    '*HiFi__Speaker__sink'
+)
+SOURCE_PRIORITY=(
+    'alsa_input.usb-Kingston_HyperX_SoloCast-*'
+    '*HiFi__Mic1__source'
+)
+
+# Seconds to wait for a burst of device events to settle before applying
+DEBOUNCE_SEC=1
+
+# Print "id<TAB>media.class<TAB>node.name" for every audio sink and source
+list_nodes() {
+    pw-dump | jq -r '.[]
+        | select((.info.props."media.class"? // "") | test("^Audio/(Sink|Source)$"))
+        | "\(.id)\t\(.info.props."media.class")\t\(.info.props."node.name")"'
+}
+
+# Set the first node of a media class matching a priority pattern as the default
+# \param $1 Output of list_nodes
+# \param $2 Media class to select from (Audio/Sink or Audio/Source)
+# \param $@ Priority patterns, highest first
+set_default() {
+    local nodes=$1
+    local media_class=$2
+    shift 2
+
+    local pattern id class name
+    for pattern in "$@" ; do
+        while IFS=$'\t' read -r id class name ; do
+            # shellcheck disable=SC2053
+            if [[ $class == "$media_class" && $name == $pattern ]] ; then
+                wpctl set-default "$id" && echo "Default $media_class: $name"
+                return
+            fi
+        done <<< "$nodes"
+    done
+}
+
+prev_nodes=""
+while read -r line ; do
+    [[ $line == added: || $line == removed: ]] || continue
+    # Drain the rest of the event burst
+    while read -r -t "$DEBOUNCE_SEC" line ; do : ; done
+
+    nodes=$(list_nodes)
+    names=$(cut -f2- <<< "$nodes" | sort)
+    if [[ $names != "$prev_nodes" ]] ; then
+        prev_nodes=$names
+        set_default "$nodes" Audio/Sink "${SINK_PRIORITY[@]}"
+        set_default "$nodes" Audio/Source "${SOURCE_PRIORITY[@]}"
+    fi
+done < <(pw-mon --no-colors)
