@@ -8,6 +8,13 @@ sudo apt-get update -qq && sudo apt-get install -y \
     unzip \
     wget
 
+# Audio source service
+mkdir -p ~/.local/bin ~/.config/systemd/user
+cp "$(dirname "$0")/../services/audio-priority" ~/.local/bin/audio-priority
+cp "$(dirname "$0")/../services/audio-priority.service" ~/.config/systemd/user/audio-priority.service
+systemctl --user daemon-reload
+systemctl --user enable --now audio-priority.service
+
 # Nerd Fonts
 wget -O "${tmp_dir}/UbuntuMono.zip" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/UbuntuMono.zip
 unzip -oq "${tmp_dir}/UbuntuMono.zip" -d "${tmp_dir}/UbuntuMono"
